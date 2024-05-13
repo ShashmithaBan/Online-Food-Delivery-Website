@@ -1,25 +1,32 @@
 package com.example.Online.Food.Ordering.System.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class CartItems {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String street;
-    private String city;
-    private String state;
-    private String postalCode;
-    // Add other address fields as needed
+    @JsonIgnore
+    @ManyToOne
+    private Cart cart;
 
     @ManyToOne
-    private User user;
+    private Food food;
+
+    private int quantity;
+
+    private List<String> ingredients;
+
+    private Long totalPrice;
 }

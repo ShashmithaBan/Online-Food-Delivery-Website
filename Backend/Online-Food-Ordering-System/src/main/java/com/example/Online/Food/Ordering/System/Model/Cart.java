@@ -5,21 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+@AllArgsConstructor
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String street;
-    private String city;
-    private String state;
-    private String postalCode;
-    // Add other address fields as needed
+    private User customer;
 
-    @ManyToOne
-    private User user;
+    private Long total;
+
+    @OneToMany(mappedBy = "cart" , cascade = CascadeType.ALL)
+    private List<CartItems> item = new ArrayList<>();
 }

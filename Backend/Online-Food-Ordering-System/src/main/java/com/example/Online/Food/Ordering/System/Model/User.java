@@ -17,7 +17,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String fullName;
@@ -29,13 +29,12 @@ public class User {
     private USER_ROLE role;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
     @ElementCollection
-    private List<RestaurantDto> favorites= new ArrayList<>();
+    private List<RestaurantDto> favorites = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL ,  orphanRemoval = true)
-    private List<Address>addresses = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
 }
