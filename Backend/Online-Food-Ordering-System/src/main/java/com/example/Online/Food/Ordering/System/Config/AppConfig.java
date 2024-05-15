@@ -22,14 +22,14 @@ import java.util.Collections;
 public class AppConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity Http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
-        Http.sessionManagement(managment-> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        http.sessionManagement(management-> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize -> Authorize
-                        //Users with "RESTUARANT_OWNER" , "ADMIN" roles can access api/admin/** endpoints
+                        //Users with "RESTAURANT_OWNER" , "ADMIN" roles can access api/admin/** endpoints
                         //So can manage the admin stuff easily
-                        .requestMatchers("/api/admin/**").hasAnyRole("RESTUARANT_OWNER" , "ADMIN")
-                        //this end point for the authenticated users which ones have the JWT tokens
+                        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER" , "ADMIN")
+                        //this end point for the authenticated users which ones have the JWT tokens any role
                         .requestMatchers("/api/**").authenticated()
                         //this is for the new vistors to the web page . they dont have any JWT token or role
                         .anyRequest().permitAll()
@@ -37,9 +37,7 @@ public class AppConfig {
                 .csrf(csrf-> csrf.disable())
                 .cors(cors->cors.configurationSource(corsConfigurationSource()));
 
-
-
-        return null;
+        return http.build();
     }
 
     private CorsConfigurationSource corsConfigurationSource() {
@@ -48,7 +46,8 @@ public class AppConfig {
           public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
               CorsConfiguration cfg = new CorsConfiguration();
               cfg.setAllowedOrigins(Arrays.asList(
-                      "..."//update this with the frontend home link {https://localhost/3000}
+                      "https://EkBar.vercel.app",
+                      "http://localhost:3000"//update this with the frontend home link {https://localhost/3000}
               ));
               cfg.setAllowedMethods(Collections.singletonList("*"));
               cfg.setAllowCredentials(true);
