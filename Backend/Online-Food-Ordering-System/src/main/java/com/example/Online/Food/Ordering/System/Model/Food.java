@@ -1,5 +1,6 @@
 package com.example.Online.Food.Ordering.System.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Food {
 
     private boolean available;
 
+    @JsonIgnore
     @ManyToOne
     private Restaurant restaurant;
 
