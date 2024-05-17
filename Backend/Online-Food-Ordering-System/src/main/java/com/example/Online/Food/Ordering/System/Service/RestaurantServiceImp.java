@@ -111,10 +111,21 @@ public class RestaurantServiceImp implements RestaurantService{
         restaurantDto.setTitle(restaurant.getName());
         restaurantDto.setId(restaurantId);
 
-        if(user.getFavorites().contains(restaurantDto)){
-            user.getFavorites().remove(restaurantDto);
+
+        boolean isFavorited = false;
+        //In here im getting the all favorite restuarant of the user and check whether the restuarant is is exist or not . if its exist isFavourited variable getting true
+        List<RestaurantDto> favorites = user.getFavorites();
+        for (RestaurantDto favorite : favorites){
+            if(favorite.getId().equals(restaurantId)){
+                isFavorited = true;
+                break;
+            }
+        }
+        //If the restaurant is already favorited,remove it; otherwise , add it to favorite.
+        if (isFavorited){
+            favorites.removeIf(favorite->favorite.getId().equals(restaurantId));
         }else{
-            user.getFavorites().add(restaurantDto);
+            favorites.add(restaurantDto);
         }
 
         userRepository.save(user);
