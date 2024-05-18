@@ -2,9 +2,11 @@ package com.example.Online.Food.Ordering.System.Controller;
 
 import com.example.Online.Food.Ordering.System.Model.Cart;
 import com.example.Online.Food.Ordering.System.Model.CartItems;
+import com.example.Online.Food.Ordering.System.Model.User;
 import com.example.Online.Food.Ordering.System.Request.AddCartItemRequest;
 import com.example.Online.Food.Ordering.System.Request.UpdateCartItemRequest;
 import com.example.Online.Food.Ordering.System.Service.CartService;
+import com.example.Online.Food.Ordering.System.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private UserService userService;
 
 
     @PutMapping("/cart/add")
@@ -53,7 +57,8 @@ public class CartController {
 
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
-        Cart cart = cartService.clearCart(  jwt);
+        User user = userService.findUserByJwtToken(jwt);
+        Cart cart = cartService.clearCart(user.getId());
 
         return new  ResponseEntity<>(cart , HttpStatus.OK);
 
@@ -63,7 +68,8 @@ public class CartController {
 
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
-        Cart cart = cartService.findCartByUserId(jwt);
+        User user = userService.findUserByJwtToken(jwt);
+        Cart cart = cartService.findCartByUserId(user.getId());
 
         return new  ResponseEntity<>(cart , HttpStatus.OK);
 
