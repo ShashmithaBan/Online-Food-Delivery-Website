@@ -90,6 +90,7 @@ public class AuthController {
         String userName = req.getEmail();
         String password = req.getPassword();
 
+
         Authentication authentication = authenticate(userName , password);
         Collection<? extends GrantedAuthority>authorities = authentication.getAuthorities();
 
@@ -106,6 +107,7 @@ public class AuthController {
 
         return new ResponseEntity<>(authResponse , HttpStatus.OK);
     }
+
     public Authentication authenticate(String userName , String password){
 
         UserDetails userDetails = customerUserDetailsService.loadUserByUsername(userName);
