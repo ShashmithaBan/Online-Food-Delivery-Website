@@ -1,19 +1,47 @@
 import React from 'react'
 import { CartItem } from './CartItem'
-import { Button, Card, Modal } from '@mui/material'
+import { Box, Button, Card, Grid, Modal, TextField  } from '@mui/material'
 import '../Cart/Cart.css'
 import { AddressCard } from './AddressCard'
 import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded';
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+//  
 
+const style = {
+    position: 'absolute' ,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    outline:'none',
+    boxShadow: 24,
+    p: 4,
+  };
+  const initialValues = {
+    streetAddress:'',
+    state:'',
+    pincode:'',
+    city:''
+  }
+  // const validationSchema = Yup.object.shape({
+  //   streetAddress:Yup.string().required("Street address is required"),
+  //   state:Yup.string().required("State is required"),
+  //   pincode:Yup.required("Pin code is required"),
+  //   city:Yup.string().required("City  is required")
+  // })
 const items =[1,1]
 const address = [1,1,1,1]
 export const Cart = () => {
     const createOrderUsingSelectedAddress=()=>{
 
-    }
-    const handleOpenAddressModal=()=>{
-
-    }
+    };
+    const handleOpenAddressModal=()=>setOpen(true);
+    const [open, setOpen] = React.useState(false); 
+  const handleClose = () => setOpen(false);
+  const handleSubmit = (value)=>{
+      console.log("form value" , value)
+  };
   return (
     <>
         <main className='lg:flex justify-between gap-2 p-2'>
@@ -78,7 +106,89 @@ export const Cart = () => {
                     </div>
              </section>
         </main>
-        
+
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Formik initialValues={initialValues}
+          // validationSchema={validationSchema}
+          onSubmit={handleSubmit}>
+            <Form >
+               <Grid container>
+              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+                <Field color='primary'
+                as = {TextField}
+                name = "streetAddress"
+                label = "Street Address"
+                fullWidth
+                variant = "outlined"
+                // error = {!ErrorMessage("streetAddress")}
+                // helperText = {
+                //   <ErrorMessage>
+                //     {(msg)=><span className='t ext'> </span>}
+                //   </ErrorMessage>
+                // }
+                />
+              </Grid>
+              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+                <Field color='primary'
+                as = {TextField}
+                name = "state"
+                label = "State"
+                fullWidth
+                variant = "outlined"
+                // error = {!ErrorMessage("streetAddress")}
+                // helperText = {
+                //   <ErrorMessage>
+                //     {(msg)=><span className='t ext'> </span>}
+                //   </ErrorMessage>
+                // }
+                />
+              </Grid>
+              <Grid item xs={6} style={{ backgroundColor: '#787878', padding:'12px'}}>
+                <Field color='primary'
+                as = {TextField}
+                name = "picode"
+                label = "Pincode"
+                fullWidth
+                variant = "outlined"
+                // error = {!ErrorMessage("streetAddress")}
+                // helperText = {
+                //   <ErrorMessage>
+                //     {(msg)=><span className='t ext'> </span>}
+                //   </ErrorMessage>
+                // }
+                />
+              </Grid>
+              <Grid item xs={6} style={{ backgroundColor: '#787878', padding:'12px'}}>
+                <Field color='primary'
+                as = {TextField}
+                name = "city"
+                label = "City"
+                fullWidth
+                variant = "outlined"
+                // error = {!ErrorMessage("streetAddress")}
+                // helperText = {
+                //   <ErrorMessage>
+                //     {(msg)=><span className='t ext'> </span>}
+                //   </ErrorMessage>
+                // }
+                />
+              </Grid>
+              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+                <Button fullWidth type="submit" variant ="contained" color="primary" >
+                  Deliver here!!
+                </Button>
+              </Grid>
+               </Grid>
+            </Form>
+          </Formik>
+        </Box>
+      </Modal>
     </>
   )
 }
