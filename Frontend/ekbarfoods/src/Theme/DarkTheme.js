@@ -25,7 +25,7 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          color: '#000000', // Ensure body text is black
+          color: '#000000',
         },
       },
     },

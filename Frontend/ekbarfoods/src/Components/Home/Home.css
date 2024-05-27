@@ -5,3 +5,15 @@
     width: 100%;
     height: 90vh;
 }
+.em-btn {
+    background-color: #40c165;
+    color: white;
+    border: 1px solid transparent;
+    transition: all 1s;
+  }
+  
+  .em-btn:hover {
+    background-color: #40c1657c;
+    border: 1px solid #40c165;
+  }
+  

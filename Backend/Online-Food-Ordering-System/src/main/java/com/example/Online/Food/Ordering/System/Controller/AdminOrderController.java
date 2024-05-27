@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminOrderController {
-    @Autowired 
+    @Autowired
     private OrderService orderService;
 
     @Autowired
