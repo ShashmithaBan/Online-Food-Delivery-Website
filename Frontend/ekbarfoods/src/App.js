@@ -7,17 +7,19 @@ import { Home } from './Components/Home/Home';
 import RestaurantDetail from './Components/Restaurant/RestaurantDetail';
 import { Cart } from './Components/Cart/Cart';
 import { Profile } from './Components/Profile/Profile';
+import { CustomerRoutes } from './Routes/CustomerRoutes';
 
 function App() {
   return (
     
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
-      <Navbar/>
+      <CustomerRoutes/>
+      {/* <Navbar/> */}
       {/*<Home/>*/}
       {/*<RestaurantDetail/>*/}
       {/* <Cart/> */}
-      <Profile/>
+      {/* <Profile/> */}
     </ThemeProvider>
   );
 }

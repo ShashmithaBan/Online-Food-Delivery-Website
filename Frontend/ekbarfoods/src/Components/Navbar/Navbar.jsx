@@ -9,8 +9,8 @@ export const Navbar = () => {
   return (
     <Box className='px-5 sticky top-0 z-[100] py-4 bg-[#40c165] md:py-2 md:px-10 lg:px-20 flex justify-between'>
       <div className="lg:mr-10 cursor-pointer flex items-center space-x-4">
-        <li className='logo font-semibold text-black-300 text-2xl list-none'>
-          EkBar <span className='text-gray-50'>Foods</span>
+        <li className='logo font-semibold text-black-300 text-2xl list-none font-mono'>
+          EkBar <span className='text-gray-50 font-extrabold'>Foods</span>
         </li>
       </div>
       <div className="flex items-center space-x-4 lg:space-x-10">

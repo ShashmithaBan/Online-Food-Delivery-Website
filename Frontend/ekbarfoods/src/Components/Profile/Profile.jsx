@@ -16,7 +16,7 @@ export const Profile = () => {
     <div className="sticky h-[100vh] lg:w-[20%] shadow-lg">
     <ProfileNaviagtion open={openSideBar}/>
     </div>   
-    <div className="lg:w-[70%]">
+    <div className="lg:w-[80%]">
           <Routes>
             <Route path='/' element={<UserProfile />}/>
             <Route path='/orders' element={<Orders />}/>

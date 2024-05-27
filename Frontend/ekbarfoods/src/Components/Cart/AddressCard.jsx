@@ -10,7 +10,7 @@ export const AddressCard = ({item,showButton , handleSelectAddress}) => {
   return (
     <Card className=' gap-5 w-64 p-5' >
         <div className="icon  flex justify-center ">
-        <HomeRoundedIcon color='primary'/>
+        <HomeRoundedIcon color='primary' sx={{fontSize:"2rem" , border:'4px solid' , borderRadius:"100%"}}/>
         </div>
         
          <div className="p-2 space-y-3 ">
