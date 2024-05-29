@@ -7,16 +7,18 @@ import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 //  
 
-const style = {
+export const style = {
     position: 'absolute' ,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    outline:'none',
+    bgcolor: 'rgba(0, 0, 0, 0.5)',
+    border:'1px solid #40c165 ',
     boxShadow: 24,
     p: 4,
+    color:'white'
+    
   };
   const initialValues = {
     streetAddress:'',
@@ -119,7 +121,7 @@ export const Cart = () => {
           onSubmit={handleSubmit}>
             <Form >
                <Grid container>
-              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+              <Grid item xs={12} style={{  padding:'12px'}}>
                 <Field color='primary'
                 as = {TextField}
                 name = "streetAddress"
@@ -134,7 +136,7 @@ export const Cart = () => {
                 // }
                 />
               </Grid>
-              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+              <Grid item xs={12} style={{  padding:'12px'}}>
                 <Field color='primary'
                 as = {TextField}
                 name = "state"
@@ -149,7 +151,7 @@ export const Cart = () => {
                 // }
                 />
               </Grid>
-              <Grid item xs={6} style={{ backgroundColor: '#787878', padding:'12px'}}>
+              <Grid item xs={6} style={{  padding:'12px'}}>
                 <Field color='primary'
                 as = {TextField}
                 name = "picode"
@@ -164,7 +166,7 @@ export const Cart = () => {
                 // }
                 />
               </Grid>
-              <Grid item xs={6} style={{ backgroundColor: '#787878', padding:'12px'}}>
+              <Grid item xs={6} style={{  padding:'12px'}}>
                 <Field color='primary'
                 as = {TextField}
                 name = "city"
@@ -179,7 +181,7 @@ export const Cart = () => {
                 // }
                 />
               </Grid>
-              <Grid item xs={12} style={{ backgroundColor: '#787878', padding:'12px'}}>
+              <Grid item xs={12} style={{ padding:'12px'}}>
                 <Button fullWidth type="submit" variant ="contained" color="primary" >
                   Deliver here!!
                 </Button>
