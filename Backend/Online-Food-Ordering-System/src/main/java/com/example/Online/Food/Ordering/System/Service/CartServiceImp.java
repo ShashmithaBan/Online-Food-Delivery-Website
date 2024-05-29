@@ -32,7 +32,7 @@ public class CartServiceImp implements CartService{
     public CartItems addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
         User user = userService.findUserByJwtToken(jwt);
         Food food = foodService.findFoodById(req.getFoodId());
-        Cart cart = cartItemRepository.findCartByCustomerId(user.getId());
+        Cart cart = cartRepository.findByCustomerId(user.getId());
 
         for (CartItems cartItem:  cart.getItem()){
             if (cartItem.getFood().equals(food)){
@@ -71,7 +71,7 @@ public class CartServiceImp implements CartService{
     public Cart removeItemFromCart(Long cartItemId, String jwt) throws Exception {
         User user = userService.findUserByJwtToken(jwt);
 
-        Cart cart = cartItemRepository.findCartByCustomerId(user.getId());
+        Cart cart = cartRepository.findByCustomerId(user.getId());
 
         Optional<CartItems> cartItemsOptional =cartItemRepository.findById(cartItemId);
         if(cartItemsOptional.isEmpty()){
