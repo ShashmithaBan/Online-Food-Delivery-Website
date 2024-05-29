@@ -10,14 +10,14 @@ const initialValues ={
 }
 export const LoginForm = () => {
     const navigate = useNavigate()
-    const handleSubmit = () =>{
-
+    const handleSubmit = (values) =>{
+ console.log("form values",values)
     }
   return (
     <div className='flex flex-col space-y-3'>
         <h3 className='font-mono  text-center text-2xl font-extrabold'>Login</h3>
 
-        <Formik  initialValues={initialValues}>
+        <Formik onSubmit={handleSubmit} initialValues={initialValues}>
             <Form >
             <Field
                  color='primary'
