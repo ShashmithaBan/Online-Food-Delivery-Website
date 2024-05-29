@@ -2,6 +2,7 @@ import React from 'react'
 import './Home.css'
 import { MultiItemCarsoul } from './MultiItemCarsoul'
 import { RestaurantCard } from '../Restaurant/RestaurantCard'
+import { Grid } from '@mui/material'
 
 const restaurant= [1,1,1,1,1,1,1]
 export const Home = () => {
@@ -9,8 +10,9 @@ export const Home = () => {
   return (
     <div className='pb-10'>
         <section className="banner -z-50 relative flex flex-row space-x-10 md:d-none ">
-        
-  <div className="absolute top-1/2 translate-y-4 lg:left-48 sm:justify-center  ">
+  <Grid container={12}>
+    <Grid item  lg={6} md={5}>
+    <div className="flex items-center justify-center h-screen ">
     <button className='em-btn sm:text-sm md:text-sm lg:text-xl font-bold lg:py-3 px-8 rounded'>
       Explore More
     </button>
@@ -19,7 +21,12 @@ export const Home = () => {
     </button>
 
 </div>
+    </Grid>
+    <Grid item lg={7} md={7}>
 
+    </Grid>
+    </Grid>    
+  
 
 
 
