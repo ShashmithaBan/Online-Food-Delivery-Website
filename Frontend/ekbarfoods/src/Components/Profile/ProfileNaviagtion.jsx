@@ -31,7 +31,10 @@ export const ProfileNaviagtion = (open,handleClose) => {
      dispatch(logout());
      navigate('/')
     }
-   navigate(`/my-profile/${item.title.toLowerCase()}`)
+    else{
+      navigate(`/my-profile/${item.title.toLowerCase()}`)
+    }
+   
   }
   return (
     <div className='w-[100vw]'>
