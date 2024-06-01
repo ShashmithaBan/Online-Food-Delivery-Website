@@ -34,7 +34,7 @@ export const loginUser=(reqData)=>async(dispatch)=>{
                 reqData.navigate("/admin/restaurant")
             }else{
                 reqData.navigate("/")
-            }
+            } 
         dispatch({
             type:REGISTER_SUCCESS,payload:data.jwt
         })
@@ -66,16 +66,16 @@ export const getUser=(jwt)=>async(dispatch)=>{
         console.log("error",error)
     }
 }
-export const addToFavourite=(jwt,restaurantId)=>async(dispatch)=>{
+export const addToFavourite=({jwt,restaurantId})=>async(dispatch)=>{
     dispatch({type:ADD_TO_FAVOURITE_REQUEST})
     try {
-            const{data} = await api.post(`/api/restaurants/${restaurantId}/add-favorites`,{
-                        headers:{
+            const{data} = await api.put(`/api/restaurants/${restaurantId}/add-favorites`,{
+                        headers:{ 
                             Authorization:`Bearer ${jwt}`
                         }
             });
             
-        dispatch({
+        dispatch({ 
             type:ADD_TO_FAVOURITE_SUCCESS,payload:data
         })
         console.log("added  to favourite",data)
@@ -87,7 +87,7 @@ export const addToFavourite=(jwt,restaurantId)=>async(dispatch)=>{
     }
 }
 export const logout=()=>async(dispatch)=>{
-    
+     
     try {
          localStorage.clear()   
             

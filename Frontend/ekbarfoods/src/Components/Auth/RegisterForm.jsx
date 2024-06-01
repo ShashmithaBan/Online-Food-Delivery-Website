@@ -4,7 +4,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../State/Authentication/Action';
+import { styled } from '@mui/material/styles'; 
 
+const BlackMenuItem = styled(MenuItem)(({ theme }) => ({
+    color: 'black',
+  }));
 const initialValues = {
     fullName: "",
     email: "",
@@ -65,8 +69,8 @@ export const RegisterForm = () => {
                                 value={values.role}
                                 onChange={handleChange}
                             >
-                                <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-                                <MenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant Owner</MenuItem>
+                                <BlackMenuItem sx={{color:"black"}} value={"ROLE_CUSTOMER"}>Customer</BlackMenuItem>
+                                <BlackMenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant Owner</BlackMenuItem>
                             </Select>
                         </FormControl>
 

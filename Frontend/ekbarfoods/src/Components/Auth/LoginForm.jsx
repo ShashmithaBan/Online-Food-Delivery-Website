@@ -14,7 +14,8 @@ export const LoginForm = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleSubmit = (values) =>{
-      dispatch(loginUser({userData:values,navigate}))
+      console.log("Login form values:" , values);
+      dispatch(loginUser({userData:values,navigate}));  
     }
   return (
     <div className='flex flex-col space-y-3'>
