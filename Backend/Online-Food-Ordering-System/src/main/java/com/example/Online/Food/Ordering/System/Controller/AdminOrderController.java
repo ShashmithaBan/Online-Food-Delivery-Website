@@ -21,8 +21,8 @@ public class AdminOrderController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/order/restaurant/{id} ")
-    public ResponseEntity<List<Order>> getOrderHistory(
+    @GetMapping("/order/restaurant/{id}")
+    public ResponseEntity<List<Order>> getRestaurantOrders(
             @PathVariable Long id,
             @RequestParam(required = false) String orderStatus,
             @RequestHeader("Authorization") String jwt
