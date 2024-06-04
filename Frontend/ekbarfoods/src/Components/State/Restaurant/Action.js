@@ -237,7 +237,7 @@ export const createCategory= ( {jwt , reqData}) => {
     }
 }}
 
-export const getResttaurantsCategory= ({jwt , restaurantId}) => {
+export const getRestaurantsCategory= ({jwt , restaurantId}) => {
     
     return async(dispatch)=>{
         
