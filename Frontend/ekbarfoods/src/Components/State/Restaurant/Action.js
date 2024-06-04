@@ -25,7 +25,7 @@ export const getAllRestaurants = (token) =>{
 export const getRestaurantById = (reqData) =>{
     return async(dispatch) =>{
         dispatch({type:GET_RESTARANT_BY_ID_REQUEST});
-        try{const {data} = await api.get(`/api/restaurant/${reqData.restaurantId}`,
+        try{const {data} = await api.get(`/api/restaurants/${reqData.restaurantId}`,
             {
                 headers:{
                     Authorization:`Bearer ${reqData.jwt}`
