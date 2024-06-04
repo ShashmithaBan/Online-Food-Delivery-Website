@@ -3,29 +3,29 @@ import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-export const RestaurantCard = () => {
+export const RestaurantCard = ({item}) => {
   return (
     <div className='m-5 w-[20rem]'>
       <div className={`relative ${true ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
         <img
           className='w-full h-[10rem] rounded-xl'
-          src="https://cdn.pixabay.com/photo/2015/06/30/18/36/st-826688_1280.jpg"
+          src={item.images[1]}
           alt=""
         />
         <Chip
           size='small'
-          sx={{ position: 'absolute', top: 8, left: 8, color:'white' , backgroundColor:"#33c500" }}
-          color={true ? 'success' : 'error'}
-          label={true ? 'Open' : 'Closed'}
+          sx={{ position: 'absolute', top: 8, left: 8, color:'white'}}
+          color={item.open ?"success":"error"}
+          label={item.open ? 'Open' : 'Closed'}
         />
       </div>
       <div className="pt-1 textpart lg:flex w-full justify-between">
         <div className="space-y-1">
           <p className="font-semibold text-xl">
-            Indian Fast Food
+            {item.name}
           </p>
           <p className="text-md text-gray-400">
-            Craving it all? Drive into our Goal
+            {item.description}
           </p>
         </div>
         <div>
