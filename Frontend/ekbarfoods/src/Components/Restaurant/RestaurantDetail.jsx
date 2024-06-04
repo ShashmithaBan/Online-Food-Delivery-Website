@@ -1,9 +1,12 @@
 import {Radio, FormControlLabel,FormControl, Grid, RadioGroup, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { Label } from '@mui/icons-material';
 import { MenuCard } from './MenuCard';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRestaurantById } from '../State/Restaurant/Action';
 
 const categories = [
     "pizza",
@@ -21,6 +24,17 @@ const foodTypes =[
 const menu = [1,1,1,1,1,1]
 export const RestaurantDetail = () => {
     const[foodType , setFoodType] = useState("all")
+    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const jwt = localStorage.getItem("jwt")
+  const {auth,restaurant} = useSelector(store => store)
+
+  const {id,city} = useParams();
+
+  console.log("restaurant" , restaurant)
+  useEffect(()=>{
+    dispatch(getRestaurantById({jwt , restaurantId:id}))
+  },[])
 
     const handleFilter = (e) =>{
         console.log(e.target.value, e.target)

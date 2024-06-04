@@ -2,10 +2,25 @@ import { Card, Chip, IconButton } from '@mui/material';
 import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavourite } from '../State/Authentication/Action';
+import { isPresentInFavourites } from '../Config/logic';
 
 export const RestaurantCard = ({item}) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const jwt = localStorage.getItem("jwt")
+  const {auth } = useSelector(store => store)
+
+  const handleAddToFavourite= () =>{
+    dispatch(addToFavourite({jwt,restaurantId:item.id}))
+  }
+  const handleNavigatetoRestaurant = () =>{
+    navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`)
+  }
   return (
-    <div className='m-5 w-[20rem]'>
+    <div className='m-5 w-[20rem]' >
       <div className={`relative ${true ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
         <img
           className='w-full h-[10rem] rounded-xl'
@@ -21,7 +36,7 @@ export const RestaurantCard = ({item}) => {
       </div>
       <div className="pt-1 textpart lg:flex w-full justify-between">
         <div className="space-y-1">
-          <p className="font-semibold text-xl">
+          <p onClick={handleNavigatetoRestaurant} className="font-semibold text-xl cursor-pointer">
             {item.name}
           </p>
           <p className="text-md text-gray-400">
@@ -29,9 +44,9 @@ export const RestaurantCard = ({item}) => {
           </p>
         </div>
         <div>
-          <IconButton>
+          <IconButton onClick={handleAddToFavourite}>
           
-            {true ? <FavoriteIcon sx={{ color: 'red' }}/> : <FavoriteBorderIcon sx={{ color: 'red' }}/>}
+            {isPresentInFavourites(auth.favourites,item) ? <FavoriteIcon sx={{ color: 'red' }}/> : <FavoriteBorderIcon sx={{ color: 'red' }}/>}
           </IconButton>
         </div>
       </div>

@@ -3,6 +3,7 @@ export const isPresentInFavourites=(favourites,restaurant)=>{
         if(restaurant.id === item.id){
                 return true;
         }
-        return false
+        
     }
+    return false
 } 
