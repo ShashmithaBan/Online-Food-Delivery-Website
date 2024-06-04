@@ -30,7 +30,7 @@ public class CategoryController {
 
              return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
-    @GetMapping("/category/restaurant/{id} ")
+    @GetMapping("/category/restaurant/{id}")
     public ResponseEntity<List<Category>> getRestaurantCategory(
             @PathVariable long id,
             @RequestHeader("Authorization") String jwt) throws Exception {
