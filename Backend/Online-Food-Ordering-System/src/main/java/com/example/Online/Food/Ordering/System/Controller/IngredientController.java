@@ -3,7 +3,7 @@ package com.example.Online.Food.Ordering.System.Controller;
 import com.example.Online.Food.Ordering.System.Model.IngredientsCategory;
 import com.example.Online.Food.Ordering.System.Model.IngredientsItems;
 import com.example.Online.Food.Ordering.System.Request.CreateIngredientCategoryRequest;
-import com.example.Online.Food.Ordering.System.Request.CreateIngredientItemRequest;
+import com.example.Online.Food.Ordering.System.Request.IngredientRequest;
 import com.example.Online.Food.Ordering.System.Service.IngredientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class IngredientController {
     }
     @PostMapping()
     public ResponseEntity<IngredientsItems> createIngredientItem(
-            @RequestBody CreateIngredientItemRequest req
+            @RequestBody IngredientRequest req
     ) throws Exception {
         IngredientsItems ingredientsItems = ingredientsService.createIngredientsItems(req.getRestaurantId(), req.getName(), req.getCategoryId());
         return new ResponseEntity<>(ingredientsItems , HttpStatus.CREATED);
