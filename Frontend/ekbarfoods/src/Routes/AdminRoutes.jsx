@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Admin } from '../AdminComponent/Admin'
+import { Admin } from '../AdminComponent/Admin Profile/Admin'
 import { CreateRestaurantForm } from '../AdminComponent/CreateRestaurantForm'
 
 

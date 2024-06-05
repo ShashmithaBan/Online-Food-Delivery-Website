@@ -14,7 +14,7 @@ import { logout } from '../State/Authentication/Action';
 
 
 const menu = [
-  {title:"Orders" , icon:<ShoppingBagIcon/>},
+  {title:"Orders" , icon:<ShoppingBagIcon/> },
   {title:"Favourites" , icon:<FavoriteIcon/>},
   {title:"Address" , icon:<HomeIcon/>},
   {title:"Payments" , icon:<PaymentsIcon/>},
