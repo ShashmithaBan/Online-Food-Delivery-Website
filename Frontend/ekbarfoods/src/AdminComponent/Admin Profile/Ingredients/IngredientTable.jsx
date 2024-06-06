@@ -1,13 +1,12 @@
-import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow  } from '@mui/material'
 import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-export default function MenuTables() {
+export const IngredientTable = () => {
   return (
     <div className='shadow-md rounded-2xl  p-5'>
         <div className="text-xl font-bold flex justify-between ">
-            Menu Items
+        Ingredients
             <CreateIcon/>
         </div>
         <div className="mt-5">
@@ -16,31 +15,26 @@ export default function MenuTables() {
         <TableHead>
           <TableRow>
           <TableCell sx={{color:"gray" , fontWeight:"Bold"}}>Id</TableCell>
-            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Image</TableCell>
-            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Title</TableCell>
-            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Ingredients</TableCell>
-            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Price</TableCell>
+            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Name</TableCell>
+            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Category</TableCell>
             <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Availability</TableCell>
-            <TableCell sx={{color:"gray" , fontWeight:"Bold"}} align="right">Delete</TableCell>
-            
+        
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1].map((row) => (
+          {[1,1,1,1,1,1,1,1,1,1,1,1,1].map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell sx={{color:"grey.900"}} component="th" scope="row">
+             <TableCell sx={{color:"grey.900"}} component="th" scope="row">
                 {1}
               </TableCell>
-             
               <TableCell sx={{color:"grey.900"}} align="right">{"image"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Shashmitha"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"356"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
-              <TableCell  align="right"><IconButton><DeleteIcon sx={{color: 'red' }}/></IconButton></TableCell>
+             
+              
               
             </TableRow>
           ))}
