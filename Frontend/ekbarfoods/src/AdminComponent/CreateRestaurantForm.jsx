@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { TextFields } from '@mui/icons-material';
+import { uploadImageToCloudinary } from './util/UploadToCloudinary';
 
 
 
@@ -55,16 +56,22 @@ export const CreateRestaurantForm = () => {
     }
   });
 
-  const handleImageChange = (e) => {
-    // Add your image change handling logic here
+  const handleImageChange = async(e) => {
+    const file = e .target.files[0]
+    setUploadImage(true)
+    const image = await uploadImageToCloudinary(file)
+    formik.setFieldValue("images" , [...formik.values.images,image])
+    setUploadImage(false)
   };
 
   const handleRemoveImage = (index) => {
-    // Add your image remove handling logic here
+    const updatedImages = [...formik.values.images]
+    updatedImages.splice(index,1)
+    formik.setFieldValue("images" , updatedImages)
   };
 
   return (
-    <div className='py-10 flex lg:flex-col items-center  min-h-screen bg-black space-y-10 '>
+    <div className='py-10 flex  flex-col items-center  min-h-screen bg-black space-y-10 '>
       <h1 className="font-bold text-3xl text-center  text-white">
         Add New Restaurant
       </h1>
@@ -83,17 +90,17 @@ export const CreateRestaurantForm = () => {
         <AddPhotoAlternateIcon className='text-white hover:text-green-500' />
       </span>
       {uploadImage && (
-        <div className='absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center'>
+        <div className='absolute left-0 right-0 top-7 bottom-0 w-24 h-24 flex justify-center'>
           <CircularProgress />
         </div>
       )}
     </label>
     <div className="flex flex-wrap gap-2">
-      {[1, 1, 1].map((item, index) => (
+      {formik.values.images.map((item, index) => (
         <div key={index} className="relative">
           <img
             className='w-24 h-24 object-cover'
-            src='https://cdn.pixabay.com/photo/2024/04/26/05/52/cheeseburger-8721189_1280.png'
+            src={item}
             alt=''
           />
           <IconButton
@@ -232,7 +239,7 @@ export const CreateRestaurantForm = () => {
     label = "mobile"
     variant = "outlined"
     onChange= {formik.handleChange}
-    value={formik.values.country}
+    value={formik.values.mobile}
     ></TextField>
   </Grid>
   <Grid item xs={3}>
