@@ -2,13 +2,18 @@ import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 export default function MenuTables() {
+  const navigate = useNavigate();
   return (
     <div className='shadow-md rounded-2xl  p-5'>
         <div className="text-xl font-bold flex justify-between ">
             Menu Items
-            <CreateIcon/>
+            <IconButton onClick={()=>navigate("/admin/restaurant/add-menu")}>
+            <CreateIcon className='color:black'/>
+            </IconButton>
+            
         </div>
         <div className="mt-5">
         <TableContainer >
@@ -40,7 +45,8 @@ export default function MenuTables() {
               <TableCell sx={{color:"grey.900"}} align="right">{"356"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
-              <TableCell  align="right"><IconButton><DeleteIcon sx={{color: 'red' }}/></IconButton></TableCell>
+              <TableCell  align="right">
+                <IconButton  aria-label='settings'><DeleteIcon sx={{color: 'red' }}/></IconButton></TableCell>
               
             </TableRow>
           ))}

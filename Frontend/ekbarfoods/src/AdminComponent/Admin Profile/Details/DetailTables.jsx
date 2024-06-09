@@ -6,7 +6,7 @@ import XIcon from '@mui/icons-material/X';
 
 export const DetailTables = () => {
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center '>
         <Grid container spacing={2}>
             <Grid item xs = {12}>
             <div className="flex flex-col justify-center  shadow-md  p-5">
