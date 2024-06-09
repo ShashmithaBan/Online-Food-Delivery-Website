@@ -121,29 +121,38 @@ export const CreateMenuForm = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField fullWidth
-              id="category"
-              name="category"
-              label="Category"
-              variant="outlined"
-              onChange={formik.handleChange}
-              value={formik.values.category}
-            />
+          <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formik.values.category}
+    label="Category"
+    onChange={(event) => {
+      const { value } = event.target;
+      formik.setFieldValue("category", value); }}
+  >
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select>
+</FormControl>
           </Grid>
           <Grid container xs={8} spacing={2} className='mt-2 pt-5 px-4'>
            
-            <FormControl sx={{ m: 2, width: 300 }}>
+            <FormControl fullWidth sx={{m:2}}>
               <InputLabel id="demo-multiple-chip-label">Ingredients</InputLabel>
               <Select
   labelId="demo-multiple-chip-label"
   id="demo-multiple-chip"
   multiple
+  label="ingredients"
   value={formik.values.ingredients} 
   onChange={(event) => {
     const { value } = event.target;
     formik.setFieldValue("ingredients", value); 
   }}
-  input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+  input={<OutlinedInput id="select-multiple-chip" label="Ingredients" />}
   renderValue={(selected) => (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "1" }}>
       {selected.map((value) => (
@@ -164,6 +173,41 @@ export const CreateMenuForm = () => {
 </Select>
 
             </FormControl>
+          </Grid>
+          
+          <Grid item xs={6}>
+          <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Seasonal</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formik.values.seasonal}
+    label="Seasonal"
+    onChange={(event) => {
+      const { value } = event.target;
+      formik.setFieldValue("seasonal", value); }}
+  >
+    <MenuItem value={true}>Yes</MenuItem>
+    <MenuItem value={false}>No</MenuItem>
+  </Select>
+</FormControl>
+          </Grid>
+          <Grid item xs={6}>
+          <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Vegetarian</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formik.values.vegetarian}
+    label="vegetarian"
+    onChange={(event) => {
+      const { value } = event.target;
+      formik.setFieldValue("vegetarian", value); }}
+  >
+   <MenuItem value={true}>Yes</MenuItem>
+   <MenuItem value={false}>No</MenuItem>
+  </Select>
+</FormControl>
           </Grid>
         </Grid>
         <Button type='submit' className='mt-4' variant='contained' color='primary'>
