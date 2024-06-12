@@ -44,7 +44,7 @@ export const CreateMenuForm = () => {
   };
 
   return (
-    <div className='py-10 flex flex-col w-full items-center min-h-screen bg-black space-y-10 '>
+    <div className='py-10 flex flex-col w-full items-center min-h-screen bg-neutral-500 space-y-10 '>
       <h1 className="font-bold text-3xl text-center text-white">
         Add Menu
       </h1>
