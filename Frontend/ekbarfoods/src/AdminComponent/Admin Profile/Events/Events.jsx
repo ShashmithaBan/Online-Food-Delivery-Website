@@ -1,7 +1,9 @@
 import React from 'react'
 import { EventCard } from '../../../Components/Profile/Cards/EventCard'
-import { Box, Button, Grid, Modal } from '@mui/material'
+import { Box, Button, Grid, Modal, TextField } from '@mui/material'
 import { CreateEventForm } from './CreateEventForm'
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const style = {
   position: 'absolute',
@@ -85,16 +87,31 @@ export const Events = () => {
 />
         </Grid>
         <Grid item xs={12}>
-        <TextField
-  fullWidth
- 
-  name="location"
-  label="Location"
-  variant="outlined"
-  onChange={handleFormChange}
-  value={formValues.location}
-  
-/>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+      
+          <DateTimePicker
+          renderInput = {()=><TextField {...props}/>}
+          />
+        </DemoItem>
+        <DemoItem
+          label={
+            <Label
+              componentName="DateRangePicker"
+              valueType="date range"
+              isProOnly
+            />
+          }
+          component="DateRangePicker"
+        >
+          <DateRangePicker
+            localeText={{
+              start: '',
+              end: '',
+            }}
+          />
+        </DemoItem>
+      </DemoContainer>
+    </LocalizationProvider>
         </Grid>
         <Grid item xs={12}>
         <TextField
