@@ -128,9 +128,8 @@ export const CreateMenuForm = () => {
     id="demo-simple-select"
     value={formik.values.category}
     label="Category"
-    onChange={(event) => {
-      const { value } = event.target;
-      formik.setFieldValue("category", value); }}
+    onChange={formik.handleChange}
+    name='category'
   >
     <MenuItem value={10}>Ten</MenuItem>
     <MenuItem value={20}>Twenty</MenuItem>
@@ -183,9 +182,8 @@ export const CreateMenuForm = () => {
     id="demo-simple-select"
     value={formik.values.seasonal}
     label="Seasonal"
-    onChange={(event) => {
-      const { value } = event.target;
-      formik.setFieldValue("seasonal", value); }}
+     onChange={formik.handleChange }
+    name='seasonal'
   >
     <MenuItem value={true}>Yes</MenuItem>
     <MenuItem value={false}>No</MenuItem>
@@ -200,9 +198,8 @@ export const CreateMenuForm = () => {
     id="demo-simple-select"
     value={formik.values.vegetarian}
     label="vegetarian"
-    onChange={(event) => {
-      const { value } = event.target;
-      formik.setFieldValue("vegetarian", value); }}
+    onChange={formik.handleChange }
+    name='vegetarian'
   >
    <MenuItem value={true}>Yes</MenuItem>
    <MenuItem value={false}>No</MenuItem>

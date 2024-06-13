@@ -2,6 +2,7 @@ import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { CreateFoodCategoryForm } from '../Foodcategory/CreateFoodCategoryForm';
+import { CreateIngredientForm } from './CreateIngredientForm';
 
 const style = {
   position: 'absolute',
@@ -29,7 +30,7 @@ export const IngredientTable = () => {
   aria-describedby="modal-modal-description"
 >
   <Box sx={style}>
-    <CreateFoodCategoryForm/>
+    <CreateIngredientForm/>
   </Box>
 </Modal>
         <div className="text-xl font-bold flex justify-between ">

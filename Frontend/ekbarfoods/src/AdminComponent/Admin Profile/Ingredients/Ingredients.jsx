@@ -1,6 +1,7 @@
 import React from 'react'
-import { FoodCategoryTable } from '../Foodcategory/FoodCategoryTable'
+
 import { IngredientTable } from './IngredientTable'
+import { IngredientCartegoryTable } from './IngredientCategoryTable'
 
 export const Ingredients = () => {
   return (
@@ -9,7 +10,7 @@ export const Ingredients = () => {
           <IngredientTable/>
         </div>
         <div className=" w-full lg:w-[30%]">
-        <FoodCategoryTable/>
+        <IngredientCartegoryTable/>
         </div>
     </div>
   )
