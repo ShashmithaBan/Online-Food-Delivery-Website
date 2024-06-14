@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './Components/State/Authentication/Action';
 import { Routers } from './Routes/Routers';
 import { CustomerRoutes } from './Routes/CustomerRoutes';
+import { getRestaurantByUserId } from './Components/State/Restaurant/Action';
 
 function App() {
   const dispatch = useDispatch()
@@ -17,8 +18,13 @@ function App() {
 
    useEffect(()=>{
     dispatch(getUser(auth.jwt || jwt))
+    
   },[auth.jwt]
   );
+  useEffect(()=>{
+   dispatch(getRestaurantByUserId(auth.jwt || jwt))
+  },[auth.user])
+
 
   return (
     
