@@ -60,7 +60,7 @@ export const getRestaurantByUserId = (jwt) =>{
     }
 }
 
-export const createRestaurant = (reqData) => {
+export const createRestaurant = (reqData,token) => {
     console.log("token--------" , reqData.token)
     return async(dispatch)=>{
         
@@ -68,7 +68,7 @@ export const createRestaurant = (reqData) => {
     try {
         const res = await api.post('/api/admin/restaurants',reqData.data,{
             headers:{
-                Authorization:`Bearer ${reqData.token}`,
+                Authorization:`Bearer ${token}`,
             },
         })
         dispatch({type:CREATE_RESTAURANT_SUCCESS,payload:res.data})

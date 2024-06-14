@@ -5,6 +5,8 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { TextFields } from '@mui/icons-material';
 import { uploadImageToCloudinary } from './util/UploadToCloudinary';
+import { useDispatch } from 'react-redux';
+import { createRestaurant } from '../Components/State/Restaurant/Action';
 
 
 
@@ -28,7 +30,8 @@ const initialValues = {
 
 export const CreateRestaurantForm = () => {
   const [uploadImage, setUploadImage] = useState(false);
- 
+ const dispatch = useDispatch()
+ const jwt = localStorage.getItem("jwt")
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -52,7 +55,9 @@ export const CreateRestaurantForm = () => {
         openingHours:values.openingHours,
         images : values.images
       }
+      dispatch(createRestaurant({data ,jwt}))
       console.log('data ---',data)
+      
     }
   });
 
@@ -147,7 +152,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.description}
     />
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6}  sm={12}>
     <TextField fullWidth
     id="cuisineType"
     name = "cuisineType"
@@ -157,7 +162,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.cuisineType}
     />
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6} sm={12}>
     <TextField fullWidth
     id="openingHours"
     name = "openingHours"
@@ -167,8 +172,8 @@ export const CreateRestaurantForm = () => {
     value={formik.values.openingHours}
     />
   </Grid>
-  <Grid container xs={8} spacing={2} className='mt-2 pt-5 px-4'>
-  <Grid item xs={4}>
+  <Grid container lg={8} md={12} spacing={2} className='mt-2 pt-5 px-4'>
+  <Grid item lg={4} md={12}>
     <TextField fullWidth
     id="streetAddress"
     name = "streetAddress"
@@ -178,7 +183,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.streetAddress}
     />
   </Grid>
-  <Grid item xs={4}>
+  <Grid item lg={4} md={12}>
     <TextField fullWidth
     id="city"
     name = "city"
@@ -188,7 +193,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.city}
     />
   </Grid>
-  <Grid item xs={4}>
+  <Grid item lg={4} md={12}>
     <TextField fullWidth
     id="stateProvince"
     name = "stateProvince"
@@ -198,7 +203,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.stateProvince}
     />
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6} md={12}>
     <TextField fullWidth
     id="postalCode"
     name = "postalCode"
@@ -208,7 +213,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.postalCode}
     />
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6} md={12}>
     <TextField fullWidth
     id="country"
     name = "country"
@@ -220,7 +225,7 @@ export const CreateRestaurantForm = () => {
   </Grid>
  
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6} md={12}>
     <TextField fullWidth
     id="email"
     name = "email"
@@ -232,7 +237,7 @@ export const CreateRestaurantForm = () => {
 
     </TextField>
   </Grid>
-  <Grid item xs={6}>
+  <Grid item lg={6} md={12}>
     <TextField fullWidth
     id="mobile"
     name = "mobile"
@@ -242,7 +247,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.mobile}
     ></TextField>
   </Grid>
-  <Grid item xs={3}>
+  <Grid item lg={3} md={12}>
     <TextField fullWidth
     id="twitter"
     name = "twitter"
@@ -252,7 +257,7 @@ export const CreateRestaurantForm = () => {
     value={formik.values.twitter}
     ></TextField>
   </Grid>
-  <Grid item xs={3}>
+  <Grid item lg={3} md={12}>
     <TextField fullWidth
     id="instagram"
     name = "instagram"
