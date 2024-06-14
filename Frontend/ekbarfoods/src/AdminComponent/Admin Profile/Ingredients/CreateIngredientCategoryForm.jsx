@@ -5,8 +5,6 @@ import { Form } from 'react-router-dom'
 export const CreateIngredientCategoryForm = () => {
 const[formData , setFormData] = useState({name:""})
   const handleSubmit = () =>{
-
-     
     console.log(formData)
   }
 
