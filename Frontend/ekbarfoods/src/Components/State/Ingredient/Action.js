@@ -54,7 +54,7 @@ export const getIngredientsCategory = ({id,jwt})=>{
     
     return async(dispatch)=>{
         try {
-            const response = await api.get(`/api/admin/ingredients/restaurant/${id}/category`,data,{
+            const response = await api.get(`/api/admin/ingredients/restaurant/${id}/category`,id,{
                 headers:{
                     Authorization: `Bearer ${jwt}`
                 }

@@ -1,20 +1,28 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form } from 'react-router-dom'
+import { createIngredients } from '../../../Components/State/Ingredient/Action'
 
 export const CreateIngredientForm = () => {
+  const {restaurant} = useSelector((store)=> store)
 const[formData , setFormData] = useState({
   name:"", 
   IngredientCartegoryId:""
 })
+const dispatch = useDispatch();
   const handleSubmit = () =>{
 
     const data= {
       name : formData.categoryName,
       ingredientCartegoryId:{
-        id:1,
+        id:restaurant.userRestaurant.id,
       }
     }
+    dispatch(createIngredients({
+      data:data,
+      jwt:localStorage.getItem("jwt")
+    }))
     console.log(data)
   }
 

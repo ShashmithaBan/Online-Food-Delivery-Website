@@ -3,6 +3,7 @@ import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import { CreateFoodCategoryForm } from './CreateFoodCategoryForm';
 import shadows from '@mui/material/styles/shadows';
+import { useDispatch, useSelector } from 'react-redux';
 
 const style = {
   position: 'absolute',
@@ -21,7 +22,9 @@ export const FoodCategoryTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+ const {restaurant} = useSelector((store) => store)
+  const dispatch = useDispatch();
+  console.log("restaurant details" , restaurant)
   return (
     
     <div className='flex gap-3 flex-col w-full'>
@@ -37,7 +40,7 @@ export const FoodCategoryTable = () => {
 </Modal>
       <div className="shadow-md rounded-2xl  p-5">
       <div className="text-xl font-bold flex justify-between">
-            All Orders
+            All Categories
             <IconButton onClick={handleOpen} >
             <CreateIcon />
             </IconButton>
