@@ -1,9 +1,12 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Form } from 'react-router-dom'
+import { createCategory } from '../../../Components/State/Restaurant/Action'
 
 export const CreateFoodCategoryForm = () => {
 const[formData , setFormData] = useState({categoryName:"", restaurantId:""})
+const dispatch = useDispatch();
   const handleSubmit = () =>{
 
     const data= {
@@ -12,6 +15,13 @@ const[formData , setFormData] = useState({categoryName:"", restaurantId:""})
         id:1,
       }
     }
+    dispatch(
+      createCategory(
+        {jwt:localStorage.getItem("")
+          
+        }
+      )
+    )
     console.log(data)
   }
 
