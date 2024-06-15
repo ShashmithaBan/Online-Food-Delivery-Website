@@ -237,22 +237,20 @@ export const createCategory= ( {jwt , reqData}) => {
     }
 }}
 
-export const getRestaurantsCategory= ({jwt , restaurantId}) => {
-    
-    return async(dispatch)=>{
-        
-    dispatch({type:GET_RESTAURANT_CATEGORY_REQUEST})
-    try {
+export const getRestaurantsCategory = ({ jwt, restaurantId }) => {
+    return async (dispatch) => {
+      dispatch({ type: GET_RESTAURANT_CATEGORY_REQUEST });
+      try {
         const res = await api.get(`/api/category/restaurant/${restaurantId}`, {
-            headers:{
-                Authorization:`Bearer ${jwt}`,
-            },
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
         });
-        console.log("create category", res.data)
-        dispatch({type:GET_RESTAURANT_CATEGORY_SUCCESS,payload:res.data})
-    } catch (error) {
-        console.log("catch error",error)
-        dispatch({type:GET_RESTAURANT_CATEGORY_FAILURE,payload:error})
-        
-    }
-}}
+        console.log('Received categories', res.data);
+        dispatch({ type: GET_RESTAURANT_CATEGORY_SUCCESS, payload: res.data });
+      } catch (error) {
+        console.error('Error fetching categories', error);
+        dispatch({ type: GET_RESTAURANT_CATEGORY_FAILURE, payload: error.message || error });
+      }
+    };
+  };

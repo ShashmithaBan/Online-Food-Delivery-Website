@@ -14,21 +14,28 @@ import { getRestaurantsCategory } from '../../Components/State/Restaurant/Action
 
 
 
-export const Admin = () => {
-  const dispatch = useDispatch();
-  const {restaurant} = useSelector((store) => store)
-  useEffect = () =>{
-    dispatch(getRestaurantsCategory({jwt , restaurantId:restaurant.userRestaurants.id}))
-  }
-  const hanndleClose  = () =>{
 
-  }
+export const Admin = () => {
+  const hanndleClose = () => {
+    console.log("hi");
+  };
+
+  const dispatch = useDispatch();
+  const { restaurant } = useSelector((store) => store);
+
+  useEffect(() => {
+    dispatch(getRestaurantsCategory({
+      jwt: localStorage.getItem("jwt"),
+      restaurantId: restaurant.userRestaurant?.id,
+    }));
+    dispatch(getRestaurants)
+  },[dispatch, restaurant.userRestaurant?.id]);
 
   return (
     <div>
         <div className="lg:flex justify-between ">
           <div className="w-[20%]">
-          <AdminSidebar handleClose = {handleClose}/>
+          <AdminSidebar onClick = {hanndleClose }/>
           </div>
             
             <div className="lg:flex w-[80%]">
