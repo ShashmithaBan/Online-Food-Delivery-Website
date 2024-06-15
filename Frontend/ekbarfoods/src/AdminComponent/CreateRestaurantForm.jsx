@@ -20,10 +20,6 @@ const initialValues = {
   stateProvince: "",
   postalCode: "",
   country: "",
-  email: "",
-  mobile: "",
-  twitter: "",
-  instagram: "",
   openingHours: "Mon-Sun : 9.00 AM - 9.00 PM",
   images: []
 };
@@ -225,48 +221,7 @@ export const CreateRestaurantForm = () => {
   </Grid>
  
   </Grid>
-  <Grid item lg={6} md={12}>
-    <TextField fullWidth
-    id="email"
-    name = "email"
-    label = "email"
-    variant = "outlined"
-    onChange= {formik.handleChange}
-    value={formik.values.email}
-    >
 
-    </TextField>
-  </Grid>
-  <Grid item lg={6} md={12}>
-    <TextField fullWidth
-    id="mobile"
-    name = "mobile"
-    label = "mobile"
-    variant = "outlined"
-    onChange= {formik.handleChange}
-    value={formik.values.mobile}
-    ></TextField>
-  </Grid>
-  <Grid item lg={3} md={12}>
-    <TextField fullWidth
-    id="twitter"
-    name = "twitter"
-    label = "twitter"
-    variant = "outlined"
-    onChange= {formik.handleChange}
-    value={formik.values.twitter}
-    ></TextField>
-  </Grid>
-  <Grid item lg={3} md={12}>
-    <TextField fullWidth
-    id="instagram"
-    name = "instagram"
-    label = "instagram"
-    variant = "outlined"
-    onChange= {formik.handleChange}
-    value={formik.values.instagram}
-    ></TextField>
-  </Grid>
 </Grid>
 
 <Button type='submit' className='mt-4' variant='contained' color='primary' >

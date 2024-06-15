@@ -27,7 +27,7 @@ export const RestaurantDetail = () => {
     const navigate = useNavigate()
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
-  const {auth,restaurant} = useSelector(store => store)
+  const {auth,restaurant} = useSelector((store) => store)
 
   const {id,city} = useParams();
 
