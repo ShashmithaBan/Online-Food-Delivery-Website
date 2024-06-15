@@ -17,7 +17,8 @@ const dispatch = useDispatch();
     }
     dispatch(
       createCategory(
-        {jwt:localStorage.getItem("")
+        {jwt:localStorage.getItem("jwt"),
+          reqData:data 
           
         }
       )

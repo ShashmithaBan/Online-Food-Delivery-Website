@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AdminSidebar } from './AdminSidebar'
 import { Route, Routes } from 'react-router-dom'
 import { Dashboard } from './Dashboard'
@@ -9,15 +9,26 @@ import { FoodCategory } from './Foodcategory/FoodCategory'
 import { Events } from './Events/Events'
 import { Details } from './Details/Details'
 import { CreateMenuForm } from './Menu/CreateMenuForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRestaurantsCategory } from '../../Components/State/Restaurant/Action'
 
 
 
 export const Admin = () => {
+  const dispatch = useDispatch();
+  const {restaurant} = useSelector((store) => store)
+  useEffect = () =>{
+    dispatch(getRestaurantsCategory({jwt , restaurantId:restaurant.userRestaurants.id}))
+  }
+  const hanndleClose  = () =>{
+
+  }
+
   return (
     <div>
         <div className="lg:flex justify-between ">
           <div className="w-[20%]">
-          <AdminSidebar/>
+          <AdminSidebar handleClose = {handleClose}/>
           </div>
             
             <div className="lg:flex w-[80%]">
