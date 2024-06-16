@@ -24,17 +24,17 @@ export const Admin = () => {
   const dispatch = useDispatch();
   const { restaurant } = useSelector((store) => store);
 
-  useEffect(() => {
-    dispatch(getRestaurantsCategory({
-      jwt,
-      restaurantId: restaurant.userRestaurant?.id,
-    }));
-    dispatch(getRestaurantOrders({
-      jwt,
-      estaurantId: restaurant.userRestaurant?.id,
-    }))
+  // useEffect(() => {
+  //   dispatch(getRestaurantsCategory({
+  //     jwt,
+  //     restaurantId: restaurant.userRestaurant?.id,
+  //   }));
+  //   dispatch(getRestaurantOrders({
+  //     jwt,
+  //     estaurantId: restaurant.userRestaurant?.id,
+  //   }))
     
-  },[]);
+  // },[]);
 
   return (
     <div>

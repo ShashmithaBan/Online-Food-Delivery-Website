@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { CreateFoodCategoryForm } from '../Foodcategory/CreateFoodCategoryForm';
 import { CreateIngredientForm } from './CreateIngredientForm';
+import { getIngredientOfRestaurant } from '../../../Components/State/Ingredient/Action';
+import { useDispatch, useSelector } from 'react-redux';
 
 const style = {
   position: 'absolute',
@@ -21,6 +23,16 @@ export const IngredientTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const jwt = localStorage.getItem("jwt")
+  const dispatch = useDispatch();
+  const {restaurant,ingredients} = useSelector((store) => store)
+  
+  useEffect(()=>{
+    dispatch(getIngredientOfRestaurant({
+      id:restaurant.userRestaurant?.id,
+      jwt
+    }))
+  },[])
   return (
     <div className='shadow-md rounded-2xl  p-5'>
       <Modal

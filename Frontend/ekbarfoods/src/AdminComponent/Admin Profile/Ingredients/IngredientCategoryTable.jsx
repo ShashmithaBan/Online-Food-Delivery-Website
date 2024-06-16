@@ -1,8 +1,10 @@
 import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, colors } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import shadows from '@mui/material/styles/shadows';
 import { CreateIngredientCategoryForm } from './CreateIngredientCategoryForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredientsCategory } from '../../../Components/State/Ingredient/Action';
 
 const style = {
   position: 'absolute',
@@ -21,6 +23,17 @@ export const IngredientCartegoryTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const jwt = localStorage.getItem("jwt")
+  const dispatch = useDispatch();
+  const {restaurant,ingredient} = useSelector((store) => store)
+  
+  useEffect(()=>{
+    dispatch(getIngredientsCategory({
+      id:restaurant.userRestaurant?.id,
+      jwt
+    }))
+  },[])
+ 
 
   return (
     
@@ -55,15 +68,15 @@ export const IngredientCartegoryTable = () => {
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1].map((row) => (
+          {ingredient.category.map((item) => (
             <TableRow
-              key={row.name}
+              key={item.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell sx={{color:"grey.900"}} align="left" >
-                {1}
+                {item.id}
               </TableCell>
-              <TableCell sx={{color:"grey.900"}} align="left">{"Shashmitha"}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="left">{item.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>
