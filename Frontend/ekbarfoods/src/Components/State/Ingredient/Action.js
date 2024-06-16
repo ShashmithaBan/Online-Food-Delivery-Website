@@ -40,7 +40,7 @@ export const createIngredientsCategory = ({ data, jwt }) => {
       try {
         console.log('Request payload:', data);
   
-        const response = await api.post('/api/admin/ingredients/category', data, {
+        const response = await api.post(`/api/admin/ingredients/category`, data, {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
@@ -59,7 +59,7 @@ export const getIngredientsCategory = ({id,jwt})=>{
     
     return async(dispatch)=>{
         try {
-            const response = await api.get(`/api/admin/ingredients/restaurant/${id}/category`,id,{
+            const response = await api.get(`/api/admin/ingredients/restaurant/${id}/category`,{
                 headers:{
                     Authorization: `Bearer ${jwt}`
                 }
