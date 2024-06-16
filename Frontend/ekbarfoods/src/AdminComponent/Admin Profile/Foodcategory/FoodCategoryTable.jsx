@@ -1,9 +1,11 @@
 import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, colors } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import { CreateFoodCategoryForm } from './CreateFoodCategoryForm';
 import shadows from '@mui/material/styles/shadows';
 import { useDispatch, useSelector } from 'react-redux';
+import { getRestaurantsCategory } from '../../../Components/State/Restaurant/Action';
+import { getRestaurantOrders } from '../../../Components/State/RestaurantOrder/Action';
 
 const style = {
   position: 'absolute',
@@ -22,9 +24,18 @@ export const FoodCategoryTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
  const {restaurant} = useSelector((store) => store)
   const dispatch = useDispatch();
-  console.log("restaurant details" , restaurant)
+  const jwt= localStorage.getItem("jwt");
+  // console.log("restaurant details" , restaurant)
+  useEffect(() => {
+    dispatch(getRestaurantsCategory({
+      jwt,
+      restaurantId: restaurant.userRestaurant?.id,
+    }));
+   
+  },[]);
   return (
     
     <div className='flex gap-3 flex-col w-full'>
@@ -40,7 +51,7 @@ export const FoodCategoryTable = () => {
 </Modal>
       <div className="shadow-md rounded-2xl  p-5">
       <div className="text-xl font-bold flex justify-between">
-            All Categories
+            Food Categories
             <IconButton onClick={handleOpen} >
             <CreateIcon />
             </IconButton>
@@ -58,15 +69,15 @@ export const FoodCategoryTable = () => {
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1].map((row) => (
+          {restaurant.categories.map((item ) => (
             <TableRow
-              key={row.name}
+              key={item.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell sx={{color:"grey.900"}} align="left" >
                 {1}
               </TableCell>
-              <TableCell sx={{color:"grey.900"}} align="left">{"Shashmitha"}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="left">{item.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>

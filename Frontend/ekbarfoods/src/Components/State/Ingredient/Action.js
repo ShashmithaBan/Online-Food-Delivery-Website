@@ -1,5 +1,5 @@
 import { api } from "../../Config/api"
-import { CREATE_INGREDIENTS_SUCCESS, CREATE_INGREDIENT_CATEGORY_SUCCESS, GET_INGREDIENTS, GET_INGREDIENT_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionType"
+import { CREATE_INGREDIENTS_SUCCESS, CREATE_INGREDIENT_CATEGORY_FAILURE, CREATE_INGREDIENT_CATEGORY_SUCCESS, GET_INGREDIENTS, GET_INGREDIENT_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionType"
 
 export const getIngredientOfRestaurant = ({id,jwt})=>{
     return async(dispatch)=>{
@@ -33,22 +33,27 @@ export const createIngredients = ({data,jwt})=>{
     }
 }
 
-export const createIngredientsCategory = ({data,jwt})=>{
-    console.log("data" , data , "jwt" , jwt) 
-    return async(dispatch)=>{
-        try {
-            const response = await api.post(`/api/admin/ingredients/category`,data,{
-                headers:{
-                    Authorization: `Bearer ${jwt}`
-                }
-            })
-            console.log("create ingredients category" ,response.data)
-            dispatch({type:CREATE_INGREDIENT_CATEGORY_SUCCESS,payload:response.data})
-        } catch (error) {
-            console.log("error" , error)
-        }
-    }
-}
+export const createIngredientsCategory = ({ data, jwt }) => {
+    return async (dispatch) => {
+      dispatch({ type: CREATE_INGREDIENT_CATEGORY_SUCCESS });
+  
+      try {
+        console.log('Request payload:', data);
+  
+        const response = await api.post('/api/admin/ingredients/category', data, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        });
+  
+        console.log('create ingredients category', response.data);
+        dispatch({ type: CREATE_INGREDIENT_CATEGORY_SUCCESS, payload: response.data });
+      } catch (error) {
+        console.error('Error creating ingredient category:', error);
+        dispatch({ type: CREATE_INGREDIENT_CATEGORY_FAILURE, payload: error.message });
+      }
+    };
+  };
 
 export const getIngredientsCategory = ({id,jwt})=>{
     

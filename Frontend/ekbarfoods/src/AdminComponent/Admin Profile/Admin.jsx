@@ -11,6 +11,7 @@ import { Details } from './Details/Details'
 import { CreateMenuForm } from './Menu/CreateMenuForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRestaurantsCategory } from '../../Components/State/Restaurant/Action'
+import { getRestaurantOrders } from '../../Components/State/RestaurantOrder/Action'
 
 
 
@@ -19,17 +20,21 @@ export const Admin = () => {
   const hanndleClose = () => {
     console.log("hi");
   };
-
+  const jwt= localStorage.getItem("jwt");
   const dispatch = useDispatch();
   const { restaurant } = useSelector((store) => store);
 
   useEffect(() => {
     dispatch(getRestaurantsCategory({
-      jwt: localStorage.getItem("jwt"),
+      jwt,
       restaurantId: restaurant.userRestaurant?.id,
     }));
-    dispatch(getRestaurants)
-  },[dispatch, restaurant.userRestaurant?.id]);
+    dispatch(getRestaurantOrders({
+      jwt,
+      estaurantId: restaurant.userRestaurant?.id,
+    }))
+    
+  },[]);
 
   return (
     <div>
