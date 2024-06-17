@@ -78,7 +78,7 @@ export const updateStockeofIngredients = ({id,jwt})=>{
     
     return async(dispatch)=>{
         try {
-            const {data} = await api.put(`/api/admin/ingredients/${id}/stoke`,data,{
+            const {data} = await api.put(`/api/admin/ingredients/${id}/stoke`,{ },{
                 headers:{
                     Authorization: `Bearer ${jwt}`
                 }

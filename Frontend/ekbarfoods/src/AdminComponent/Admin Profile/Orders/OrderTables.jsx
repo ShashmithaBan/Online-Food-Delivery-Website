@@ -1,7 +1,21 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import React from 'react'
+import { Avatar, AvatarGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRestaurantOrders } from '../../../Components/State/RestaurantOrder/Action';
 
 export default function OrderTables() {
+  const dispatch = useDispatch();
+ const {restaurantOrder , restaurant} = useSelector((store) => store)
+ const jwt = localStorage.getItem("jwt")
+ useEffect(()=>{
+ dispatch(getRestaurantOrders(
+  {
+    restaurantId:restaurant.userRestaurant.id,
+    jwt
+  }
+
+ ))
+ },[])
   return (
     <div>
         <div className="text-xl font-bold">
@@ -23,17 +37,23 @@ export default function OrderTables() {
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1].map((row) => (
+          {restaurantOrder.orders.map((item) => (
             <TableRow
-              key={row.name}
+              key={item.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell sx={{color:"grey.900"}} component="th" scope="row">
-                {1}
+                {item.id}
               </TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"image"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"Shashmitha"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"356"}</TableCell>
+              <TableCell  align="right">
+                <AvatarGroup>
+                  {item.item.map((orderItem)=>{
+                    <Avatar src={orderItem.food?.images[0]}/>
+                  })}
+                </AvatarGroup>
+              </TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.user.fullName}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Completed"}</TableCell>

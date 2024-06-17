@@ -68,7 +68,7 @@ export const IngredientCartegoryTable = () => {
           </TableRow>
         </TableHead>
          <TableBody>
-          {ingredient.category.map((item) => (
+          {/* {ingredient.category.map((item) => (
             <TableRow
               key={item.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -78,7 +78,7 @@ export const IngredientCartegoryTable = () => {
               </TableCell>
               <TableCell sx={{color:"grey.900"}} align="left">{item.name}</TableCell>
             </TableRow>
-          ))}
+          ))} */}
         </TableBody>
       </Table>
     </TableContainer>

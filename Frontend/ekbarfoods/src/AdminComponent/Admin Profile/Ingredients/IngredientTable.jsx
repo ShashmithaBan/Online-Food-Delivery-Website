@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
-import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box, Button, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { CreateFoodCategoryForm } from '../Foodcategory/CreateFoodCategoryForm';
 import { CreateIngredientForm } from './CreateIngredientForm';
-import { getIngredientOfRestaurant } from '../../../Components/State/Ingredient/Action';
+import { getIngredientOfRestaurant, updateStockeofIngredients } from '../../../Components/State/Ingredient/Action';
 import { useDispatch, useSelector } from 'react-redux';
 
 const style = {
@@ -33,6 +33,13 @@ export const IngredientTable = () => {
       jwt
     }))
   },[])
+  const handleUpdateStock = (id) =>{
+    dispatch(updateStockeofIngredients(
+      {id,
+      jwt}
+      
+    ))
+  }
   return (
     <div className='shadow-md rounded-2xl  p-5'>
       <Modal
@@ -65,22 +72,21 @@ export const IngredientTable = () => {
           </TableRow>
         </TableHead>
          <TableBody>
-          {ingredient.ingredients.map((item) => (
-            <TableRow
-              key={item.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-             <TableCell sx={{color:"grey.900"}} component="th" scope="row">
-                {1}
-              </TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{item.name}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{item.category.name}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{item.inStock?"instock":"out_of_stock "}</TableCell>
-             
-              
-              
-            </TableRow>
-          ))}
+         {ingredient.ingredients.map((item, index) => (
+  <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+    <TableCell sx={{ color: "grey.900" }} component="th" scope="row">
+      {index + 1} {/* Adjust to show 1-based index */}
+    </TableCell>
+    <TableCell sx={{ color: "grey.900" }} align="right">{item.name}</TableCell>
+    <TableCell sx={{ color: "grey.900" }} align="right">{item.category.name}</TableCell>
+    <TableCell align="right">
+      <Button onClick={() => handleUpdateStock(item.id)}>
+        {item.inStoke ? "in_stock" : "out of stock"}
+      </Button>
+    </TableCell>
+  </TableRow>
+))}
+
         </TableBody>
       </Table>
     </TableContainer>

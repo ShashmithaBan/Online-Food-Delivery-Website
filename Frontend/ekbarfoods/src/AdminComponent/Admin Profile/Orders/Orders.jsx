@@ -37,7 +37,7 @@ export const Orders = () => {
       
   </div>
   <div className="shadow-md rounded-2xl w-full p-5">
-    <OrderTables/>
+    <OrderTables />
   </div>
   
     </div>
