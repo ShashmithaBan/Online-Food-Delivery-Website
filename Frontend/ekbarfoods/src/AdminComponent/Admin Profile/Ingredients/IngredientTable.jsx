@@ -25,7 +25,7 @@ export const IngredientTable = () => {
   const handleClose = () => setOpen(false);
   const jwt = localStorage.getItem("jwt")
   const dispatch = useDispatch();
-  const {restaurant,ingredients} = useSelector((store) => store)
+  const {restaurant,ingredient} = useSelector((store) => store)
   
   useEffect(()=>{
     dispatch(getIngredientOfRestaurant({
@@ -65,17 +65,17 @@ export const IngredientTable = () => {
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1,1,1,1,1,1,1,1].map((row) => (
+          {ingredient.ingredients.map((item) => (
             <TableRow
-              key={row.name}
+              key={item.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
              <TableCell sx={{color:"grey.900"}} component="th" scope="row">
                 {1}
               </TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"image"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"Shashmitha"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"356"}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.name}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.category.name}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.inStock?"instock":"out_of_stock "}</TableCell>
              
               
               
