@@ -6,20 +6,23 @@ import { createIngredientsCategory } from '../../../Components/State/Ingredient/
 export const CreateIngredientCategoryForm = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ name: "" });
-  const {restaurant} = useSelector((store) => store)
-  
+  const { restaurant } = useSelector((store) => store);
+  const jwt = localStorage.getItem("jwt");
+
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    const data = {
-      name: formData.name,
-      restaurantId:restaurant.userRestaurant?.id ,
-      
-    };
-    console.log("Ingredient Categories:", data);
-    dispatch(createIngredientsCategory({
+    e.preventDefault();
+    
+      const data = {
+        name: formData.name,
+        restaurantId: restaurant.userRestaurant.id,
+      };
+
+      console.log("Ingredient Categories:", data);
+      dispatch(createIngredientsCategory({
         data,
-      jwt: localStorage.getItem("jwt"),
-    }));
+        jwt,
+      }));
+  
   };
 
   const handleInputChange = (e) => {

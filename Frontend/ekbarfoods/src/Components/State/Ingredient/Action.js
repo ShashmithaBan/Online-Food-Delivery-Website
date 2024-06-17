@@ -1,5 +1,5 @@
 import { api } from "../../Config/api"
-import { CREATE_INGREDIENTS_SUCCESS, CREATE_INGREDIENT_CATEGORY_FAILURE, CREATE_INGREDIENT_CATEGORY_SUCCESS, GET_INGREDIENTS, GET_INGREDIENT_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionType"
+import { CREATE_INGREDIENTS_FAILURE, CREATE_INGREDIENTS_SUCCESS, CREATE_INGREDIENT_CATEGORY_FAILURE, CREATE_INGREDIENT_CATEGORY_SUCCESS, GET_INGREDIENTS, GET_INGREDIENT_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionType"
 
 export const getIngredientOfRestaurant = ({id,jwt})=>{
     return async(dispatch)=>{
@@ -19,16 +19,18 @@ export const getIngredientOfRestaurant = ({id,jwt})=>{
 
 export const createIngredients = ({data,jwt})=>{
     return async(dispatch)=>{
+        dispatch({ type: CREATE_INGREDIENTS_SUCCESS});
         try {
             const response = await api.post(`/api/admin/ingredients`,data,{
-                headers:{
-                    Authorization: `Bearer ${jwt}`
-                }
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                  },
             })
             console.log("create ingredients" ,response.data)
             dispatch({type:CREATE_INGREDIENTS_SUCCESS,payload:response.data})
         } catch (error) {
             console.log("error" , error)
+            dispatch({ type: CREATE_INGREDIENTS_FAILURE, payload: error.message });
         }
     }
 }

@@ -7,24 +7,22 @@ export const CreateIngredientForm = () => {
   const { restaurant, ingredient } = useSelector((store) => store);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: "", 
-    ingredientCategoryId: ""
+    name:"",
+    categoryId: ""
   });
-
-
-    const jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem("jwt");
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      ...formData,
+       ...formData,
       restaurantId: restaurant.userRestaurant.id,
+      
     };
 
     dispatch(createIngredients({
-      data: data,
-      jwt: localStorage.getItem("jwt")
+       data,
+      jwt,
     }));
     console.log(data);
   };
@@ -45,12 +43,12 @@ export const CreateIngredientForm = () => {
         <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
           <TextField
             fullWidth
-            id="categoryName"
-            name="categoryName"
+            id="name"
+            name="name"
             label="Category Name"
             variant="outlined"
             onChange={handleInputChange}
-            value={formData.categoryName}
+            value={formData.name}
           />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -60,11 +58,10 @@ export const CreateIngredientForm = () => {
               value={formData.ingredientCategoryId}
               label="Category"
               onChange={handleInputChange}
-              name='ingredientCategoryId'
+              name='categoryId'
             >
-              {ingredient.catergory.map((item) => (
-                <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
-              ))}
+              {ingredient.category.map((item) =><MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+              )}
             </Select>
           </FormControl>
           <Button type="submit" variant="contained">
