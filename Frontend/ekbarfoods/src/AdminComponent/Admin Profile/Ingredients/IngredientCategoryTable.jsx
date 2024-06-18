@@ -30,7 +30,11 @@ export const IngredientCartegoryTable = () => {
       console.log("Fetching categories for restaurant ID:", restaurant.userRestaurant.id);
       dispatch(getIngredientsCategory({
         id: restaurant.userRestaurant.id,
-        jwt
+        jwt:jwt,
+        vegetarian:false,
+        seasonal:false,
+        nonveg:false
+
       }));
     }
   }, [dispatch, jwt, restaurant.userRestaurant?.id]);
