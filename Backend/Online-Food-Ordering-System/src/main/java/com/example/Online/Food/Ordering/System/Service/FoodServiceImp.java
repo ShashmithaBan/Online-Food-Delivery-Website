@@ -22,7 +22,7 @@ public class FoodServiceImp implements FoodService {
     public Food createFood(CreateFoodRequest req, Category category, Restaurant restaurant) {
 
         Food food = new Food();
-        food.setCategory(category);
+        
         food.setRestaurant(restaurant);
         food.setDescription(req.getDescription());
         food.setImages(req.getImages());

@@ -44,8 +44,9 @@ public class IngredientController {
     public List<IngredientsItems> getRestaurantIngredients(
             @PathVariable Long id
     ) throws Exception {
-        List<IngredientsItems> ingredientsItems = ingredientsService.findRestaurantIngredients(id);
-        return ingredientsItems;
+        List<IngredientsItems> ingredients = ingredientsService.findRestaurantIngredients(id);
+        ingredients.forEach(item -> System.out.println("Controller Layer - InStock: " + item.isInStock())); // Debugging line
+        return ingredients;
     }
     @GetMapping("/restaurant/{id}/category")
     public ResponseEntity<List<IngredientsCategory>> getRestaurantIngredientsCategory(
