@@ -3,12 +3,12 @@ import { api } from "../../Config/api"
 
 
 
-export const craeteMenuItem = ({menu,jwt})=>{
+export const createMenuItem = ({reqData,jwt})=>{
     return async(dispatch) =>{
         dispatch({type:CREATE_MENU_ITEM_REQUEST});
 
         try {
-            const {data} = await api.post('api/admin/food', menu ,{
+            const {data} = await api.post('/api/admin/food', reqData ,{
                 headers:{
                     Authorization:`Bearer ${jwt}`
                 }
@@ -29,9 +29,7 @@ export const getMenuItemByRestaurantId = (reqData)=>{
         try {
             const {data} = await api.get(`api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}
             &nonveg=${reqData.nonveg}&seasonal=${reqData.seasonal}&food_category=${reqData.food_category}`,{
-                headers:{
-                    Authorization:`Bearer ${jwt}`
-                }
+               
             })
             console.log("Item of the menu" , data)
             dispatch({type:GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS , payload:data})

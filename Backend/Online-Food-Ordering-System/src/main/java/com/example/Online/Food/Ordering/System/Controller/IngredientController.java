@@ -41,11 +41,11 @@ public class IngredientController {
         return new ResponseEntity<>(ingredientsItems , HttpStatus.OK);
     }
     @GetMapping("/restaurant/{id}")
-    public ResponseEntity<List<IngredientsItems>> getRestaurantIngredients(
+    public List<IngredientsItems> getRestaurantIngredients(
             @PathVariable Long id
     ) throws Exception {
         List<IngredientsItems> ingredientsItems = ingredientsService.findRestaurantIngredients(id);
-        return new ResponseEntity<>(ingredientsItems , HttpStatus.OK);
+        return ingredientsItems;
     }
     @GetMapping("/restaurant/{id}/category")
     public ResponseEntity<List<IngredientsCategory>> getRestaurantIngredientsCategory(

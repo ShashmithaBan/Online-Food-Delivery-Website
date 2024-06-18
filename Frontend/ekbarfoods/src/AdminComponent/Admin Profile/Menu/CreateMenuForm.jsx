@@ -5,6 +5,8 @@ import { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { uploadImageToCloudinary } from '../../util/UploadToCloudinary';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMenuItem } from '../../../Components/State/Menu/Action';
 
 const initialValues = {
   name: "",
@@ -20,12 +22,17 @@ const initialValues = {
 
 export const CreateMenuForm = () => {
   const [uploadImage, setUploadImage] = useState(false);
+  const { restaurant ,ingredient } = useSelector((store) => store);
+  const jwt =localStorage.getItem("jwt")
+  const dispatch = useDispatch();
+  console.log('Ingredients:', ingredient.ingredients);
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      values.restaurantId = 2;
+      values.restaurantId = restaurant.userRestaurant.id;
       console.log('data ---', values);
+      dispatch(createMenuItem({reqData:values,jwt}))
     }
   });
 
@@ -155,18 +162,18 @@ export const CreateMenuForm = () => {
   renderValue={(selected) => (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "1" }}>
       {selected.map((value) => (
-        <Chip key={value} label={value} />
+        <Chip key={value.id} label={value.name} />
       ))}
     </Box>
   )}
 >
-  {["Bread", "Sauce"].map((name, index) => (
+  {ingredient.ingredients.map((item, index) => (
     <MenuItem
-      key={name}
-      value={name}
+      key={item.id}
+      value={item.id}
       sx={{ color: "black" }}
     >
-      {name}
+      {item.name}
     </MenuItem>
   ))}
 </Select>
@@ -208,7 +215,7 @@ export const CreateMenuForm = () => {
           </Grid>
         </Grid>
         <Button type='submit' className='mt-4' variant='contained' color='primary'>
-          Create Restaurant
+          Create Item
         </Button>
       </form>
     </div>
