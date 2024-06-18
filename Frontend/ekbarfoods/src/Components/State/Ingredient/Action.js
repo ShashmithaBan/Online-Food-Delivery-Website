@@ -1,21 +1,22 @@
 import { api } from "../../Config/api"
 import { CREATE_INGREDIENTS_FAILURE, CREATE_INGREDIENTS_SUCCESS, CREATE_INGREDIENT_CATEGORY_FAILURE, CREATE_INGREDIENT_CATEGORY_SUCCESS, GET_INGREDIENTS, GET_INGREDIENT_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionType"
 
-export const getIngredientOfRestaurant = ({id,jwt})=>{
-    return async(dispatch)=>{
-        try {
-            const response = await api.get(`/api/admin/ingredients/restaurant/${id}`,{
-                headers:{
-                    Authorization: `Bearer ${jwt}`
-                }
-            })
-            console.log("get all ingredients" ,response.data)
-            dispatch({type:GET_INGREDIENTS,payload:response.data})
-        } catch (error) {
-            console.log("error" , error)
-        }
-    }
-}
+export const getIngredientOfRestaurant = ({ id, jwt }) => {
+    return async (dispatch) => {
+      try {
+        const response = await api.get(`/api/admin/ingredients/restaurant/${id}`, {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        });
+        console.log("get all ingredients", response.data);
+        dispatch({ type: GET_INGREDIENTS, payload: response.data });
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+  };
+  
 
 export const createIngredients = ({data,jwt})=>{
     return async(dispatch)=>{

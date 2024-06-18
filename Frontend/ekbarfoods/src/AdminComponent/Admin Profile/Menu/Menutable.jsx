@@ -1,11 +1,24 @@
-import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow  } from '@mui/material'
-import React from 'react'
+import { Avatar, Chip, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow  } from '@mui/material'
+import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMenuItemByRestaurantId } from '../../../Components/State/Menu/Action';
 
 export default function MenuTables() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {restaurant , menuItem} = useSelector((store)=> store);
+  const jwt = localStorage.getItem("jwt");
+
+   useEffect(()=>{
+      dispatch(getMenuItemByRestaurantId(
+        {restaurantId:restaurant.userRestaurant?.id,
+          jwt
+        }
+      ))
+   },[])
   return (
     <div className='shadow-md rounded-2xl  p-5'>
         <div className="text-xl font-bold flex justify-between ">
@@ -31,18 +44,18 @@ export default function MenuTables() {
           </TableRow>
         </TableHead>
          <TableBody>
-          {[1,1,1,1,1,1].map((row) => (
+          {menuItem.menuItems.map((item) => (
             <TableRow
-              key={row.name}
+              key={item.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell sx={{color:"grey.900"}} component="th" scope="row">
-                {1}
+                {item.id}
               </TableCell>
              
-              <TableCell sx={{color:"grey.900"}} align="right">{"image"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"Shashmitha"}</TableCell>
-              <TableCell sx={{color:"grey.900"}} align="right">{"356"}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right"><Avatar src={item.images[0] }></Avatar></TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.name}</TableCell>
+              <TableCell sx={{color:"grey.900"}} align="right">{item.ingredients.map((ingredients)=><Chip label={ingredients}/>)}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
               <TableCell sx={{color:"grey.900"}} align="right">{"Burger"}</TableCell>
               <TableCell  align="right">

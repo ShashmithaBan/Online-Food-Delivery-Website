@@ -4,6 +4,7 @@ import com.example.Online.Food.Ordering.System.Model.Category;
 import com.example.Online.Food.Ordering.System.Model.Restaurant;
 import com.example.Online.Food.Ordering.System.Model.User;
 import com.example.Online.Food.Ordering.System.Repo.CategoryRepository;
+import com.example.Online.Food.Ordering.System.Repo.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,19 @@ public class CategoryServiceImp implements CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @Override
-    public Category createCategory(String Name, Long id) throws Exception {
-        Restaurant restaurant = restaurantService.getRestaurantByUserId(id);
+    public Category createCategory(String categoryName, Long userId) throws Exception {
+        Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
+
+
         Category category = new Category();
-        category.setName(Name);
+        category.setName(categoryName);
         category.setRestaurant(restaurant);
 
-        return categoryRepository.save(category) ;
+        return categoryRepository.save(category);
     }
 
     @Override

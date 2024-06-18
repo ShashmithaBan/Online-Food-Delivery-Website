@@ -69,7 +69,9 @@ public class IngredientServiceImp implements IngredientsService {
 
     @Override
     public List<IngredientsItems> findRestaurantIngredients(Long restaurantId) {
-        return ingredientItemRepository.findByRestaurantId(restaurantId);
+        List<IngredientsItems> ingredients = ingredientItemRepository.findByRestaurantId(restaurantId);
+        ingredients.forEach(item -> System.out.println("Service Layer - InStock: " + item.isInStock())); // Debugging line
+        return ingredients;
     }
 
     @Override
