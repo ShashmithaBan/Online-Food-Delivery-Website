@@ -70,7 +70,7 @@ export const IngredientCartegoryTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ingredient.categories && ingredient.categories.map((item) => (
+                { ingredient.categories.map((item) => (
                   <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                     <TableCell sx={{ color: "grey.900" }} align="left">
                       {item.id}
@@ -78,13 +78,7 @@ export const IngredientCartegoryTable = () => {
                     <TableCell sx={{ color: "grey.900" }} align="left">{item.name}</TableCell>
                   </TableRow>
                 ))}
-                {!ingredient.categories && (
-                  <TableRow>
-                    <TableCell colSpan={2} align="center">
-                      Loading...
-                    </TableCell>
-                  </TableRow>
-                )}
+                
               </TableBody>
             </Table>
           </TableContainer>
