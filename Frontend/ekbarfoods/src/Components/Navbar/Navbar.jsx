@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Badge, Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { green } from '@mui/material/colors';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Person4Icon from '@mui/icons-material/Person4';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Navbar.css';
+import { getUser } from '../State/Authentication/Action';
 
 const Navbar = () => {
-  const { auth } = useSelector(store => store) || { auth: { user: null } }; // Provide a default value to prevent undefined errors
+  const { auth } = useSelector(store => store) || { auth: { user: null } }; 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem('jwt');
+  console.log('hi',auth)
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  }, [dispatch, jwt]);
 
   const handleAvatarClick = () => {
-    if (auth?.user?.role === "ROLE_CUSTOMER") {
+    if (auth.user?.role === "ROLE_CUSTOMER") {
       navigate("/my-profile");
-    } else {
+    } else if(auth.user?.role === "ROLE_CUSTOMER") {
       navigate("/admin/restaurant");
     }
   };
@@ -29,12 +39,12 @@ const Navbar = () => {
       </div>
       <div className="flex items-center space-x-4 lg:space-x-10">
         <div>
-          <IconButton className=''>
+          <IconButton>
             <SearchIcon sx={{ fontSize: "2rem", color: "#fff" }} />
           </IconButton>
         </div>
-        <div className="">
-          {auth?.user ? (
+        <div>
+          {auth.user ? (
             <Avatar onClick={handleAvatarClick} sx={{ bgcolor: "white", color: green.A700 }}>
               {auth.user?.fullName[0]?.toUpperCase()}
             </Avatar>
@@ -45,7 +55,7 @@ const Navbar = () => {
           )}
         </div>
         <div>
-          <IconButton className=''>
+          <IconButton>
             <Badge badgeContent={3} color="secondary">
               <ShoppingCartIcon sx={{ fontSize: "2rem" }} />
             </Badge>

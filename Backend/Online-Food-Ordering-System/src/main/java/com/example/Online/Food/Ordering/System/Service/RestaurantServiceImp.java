@@ -106,7 +106,7 @@ public class RestaurantServiceImp implements RestaurantService{
         Restaurant restaurant = findRestaurantById(restaurantId);
 
         RestaurantDto restaurantDto = new RestaurantDto();
-        restaurantDto.setDescription(restaurantDto.getDescription());
+        restaurantDto.setDescription(restaurant.getDescription());
         restaurantDto.setImages(restaurant.getImages());
         restaurantDto.setTitle(restaurant.getName());
         restaurantDto.setId(restaurantId);

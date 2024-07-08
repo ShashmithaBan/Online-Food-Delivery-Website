@@ -23,23 +23,23 @@ export const Admin = () => {
   };
   const jwt= localStorage.getItem("jwt");
   const dispatch = useDispatch();
-  const { restaurant } = useSelector((store) => store);
+  // const { restaurant } = useSelector((store) => store);
 
-  useEffect(() => {
-    dispatch(getRestaurantsCategory({
-      jwt,
-      restaurantId: restaurant.userRestaurant?.id,
-    }));
-    dispatch(getRestaurantOrders({
-      jwt,
-      restaurantId: restaurant.userRestaurant?.id,
-    }))
-    dispatch(getIngredientOfRestaurant({
-     id:restaurant.userRestaurant?.id,
-     jwt
-    }))
+  // useEffect(() => {
+  //   dispatch(getRestaurantsCategory({
+  //     jwt,
+  //     restaurantId: restaurant.userRestaurant?.id,
+  //   }));
+  //   dispatch(getRestaurantOrders({
+  //     jwt,
+  //     restaurantId: restaurant.userRestaurant?.id,
+  //   }))
+  //   dispatch(getIngredientOfRestaurant({
+  //    id:restaurant.userRestaurant?.id,
+  //    jwt
+  //   }))
     
-  },[]);
+  // },[]);
 
   return (
     <div>

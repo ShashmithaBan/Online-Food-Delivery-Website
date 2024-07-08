@@ -51,7 +51,7 @@ export const CreateRestaurantForm = () => {
         openingHours:values.openingHours,
         images : values.images
       }
-      dispatch(createRestaurant({data ,jwt}))
+      
       console.log('data ---',data)
       
     }

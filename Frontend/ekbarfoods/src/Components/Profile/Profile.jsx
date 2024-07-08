@@ -11,6 +11,7 @@ import { Events } from './Events';
 
 export const Profile = () => {
   const [openSideBar , setOpenSideBar] = useState(false);
+  
   return (
     <div className='lg:flex justify-between'>
     <div className="sticky h-[100vh] lg:w-[20%] shadow-lg">
