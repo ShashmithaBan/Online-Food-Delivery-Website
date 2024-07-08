@@ -56,6 +56,26 @@ export const getRestaurantById = createAsyncThunk(
   }
 )
 
+export const createRestaurant = createAsyncThunk(
+  'restaurant/createRestaurant',
+  async ({reqData,jwt}, thunkAPI) => {
+    try {
+      console.log('data came', reqData )
+      const response = await axios.post(`${API}/api/admin/restaurants`, reqData, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      console.log("created", response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Failed to create the restaurant:', error.message);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 
 export const restaurantSlice = createSlice({
   name: 'restaurant',
@@ -67,7 +87,8 @@ export const restaurantSlice = createSlice({
     error: null,
     events: [],
     restaurantEvents: [],
-    categories: []
+    categories: [],
+    
   },
   reducers: {
     
@@ -107,6 +128,19 @@ export const restaurantSlice = createSlice({
         state.restaurant = action.payload;
       })
       .addCase(getRestaurantById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || action.error;
+      })
+      .addCase(createRestaurant.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createRestaurant.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userRestaurant = action.payload;
+        state.restaurants.push(action.payload);
+      })
+      .addCase(createRestaurant.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || action.error;
       });

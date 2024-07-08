@@ -22,9 +22,7 @@ export const AdminRoutes = () => {
     return <p>Loading...</p>; 
   }
 
-  if (error) {
-    return <p>Error: {error}</p>; 
-  }
+  
 
   return (
     <Routes>

@@ -5,7 +5,7 @@ const API = 'http://localhost:5454';
 
 
 export const getUserOrders = createAsyncThunk(
-  'restaurant/getRestaurantByUserId',
+  'order/getRestaurantByUserId',
   async (token , thunkAPI) => {
     try {
       const {data }= await axios.get(`${API}/api/order/user`,
@@ -20,6 +20,27 @@ export const getUserOrders = createAsyncThunk(
     }
   }
 )
+
+
+export const getRestaurantOrders = createAsyncThunk(
+  'order/getRestaurantOrders',
+  async ({ id, jwt  , orderStatus}, thunkAPI) => {
+    try {
+      const response = await axios.get(`${API}/api/admin/order/restaurant/${id}`, {
+        params:{orderStatus:orderStatus},
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
+      const orders = response.data
+      console.log("get restaurant orders", orders);
+      return orders;
+    } catch (error) {
+      console.error('Fetch the orders owned by the restaurant error:', error.message);
+      throw error;
+    }
+  }
+);
 
 
 
