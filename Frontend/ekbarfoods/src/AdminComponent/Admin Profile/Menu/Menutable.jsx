@@ -11,7 +11,7 @@ export default function MenuTables() {
   const dispatch = useDispatch();
   const {restaurant , menuItem} = useSelector((store)=> store);
   const jwt = localStorage.getItem("jwt");
-
+ console.log("menuitem",menuItem)
    useEffect(()=>{
       dispatch(getMenuItemByRestaurantId(
         {restaurantId:restaurant.userRestaurant?.id,
@@ -43,7 +43,7 @@ export default function MenuTables() {
             
           </TableRow>
         </TableHead>
-         <TableBody>
+         {/* <TableBody>
           {menuItem.menuItems.map((item) => (
             <TableRow
               key={item.id}
@@ -63,7 +63,7 @@ export default function MenuTables() {
               
             </TableRow>
           ))}
-        </TableBody>
+        </TableBody> */}
       </Table>
     </TableContainer>
         </div>

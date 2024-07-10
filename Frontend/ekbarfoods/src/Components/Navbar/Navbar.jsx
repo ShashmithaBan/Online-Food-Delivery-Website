@@ -14,7 +14,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const jwt = localStorage.getItem('jwt');
-  console.log('hi',auth)
+  console.log('hi', auth);
 
   useEffect(() => {
     if (jwt) {
@@ -23,9 +23,12 @@ const Navbar = () => {
   }, [dispatch, jwt]);
 
   const handleAvatarClick = () => {
+    console.log("Avatar clicked");
     if (auth.user?.role === "ROLE_CUSTOMER") {
+      console.log("Navigating to /my-profile");
       navigate("/my-profile");
-    } else if(auth.user?.role === "ROLE_CUSTOMER") {
+    } else if (auth.user?.role === "ROLE_RESTAURANT_OWNER") { 
+      console.log("Navigating to /admin/restaurant");
       navigate("/admin/restaurant");
     }
   };
@@ -45,7 +48,10 @@ const Navbar = () => {
         </div>
         <div>
           {auth.user ? (
-            <Avatar onClick={handleAvatarClick} sx={{ bgcolor: "white", color: green.A700 }}>
+            <Avatar 
+              onClick={handleAvatarClick} 
+              sx={{ bgcolor: "white", color: green.A700, cursor: 'pointer' }} // Added cursor pointer for clarity
+            >
               {auth.user?.fullName[0]?.toUpperCase()}
             </Avatar>
           ) : (
