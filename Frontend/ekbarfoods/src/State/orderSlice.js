@@ -13,6 +13,7 @@ export const getUserOrders = createAsyncThunk(
             Authorization:`Bearer ${token}`
         }
     });
+    
     console.log("get user order",data )
     } catch (error) {
       console.error('Fetch the restaurant own by the user error:', error.message);
@@ -66,6 +67,18 @@ export const orderSlice = createSlice({
         state.orders = action.payload;
       })
       .addCase(getUserOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || action.error;
+      })
+      .addCase(getRestaurantOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getRestaurantOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+      })
+      .addCase(getRestaurantOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || action.error;
       });
