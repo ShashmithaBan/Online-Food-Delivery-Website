@@ -230,6 +230,7 @@ export const getRestaurantsCategory = createAsyncThunk(
   'restaurant/getRestaurantsCategory',
   async ({ jwt, restaurantId }, thunkAPI) => {
     try {
+     
       const res = await api.get(`/api/category/restaurant/${restaurantId}`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
@@ -239,7 +240,7 @@ export const getRestaurantsCategory = createAsyncThunk(
       return res.data;
     } catch (error) {
       console.error('Error fetching categories', error);
-      throw error;
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );

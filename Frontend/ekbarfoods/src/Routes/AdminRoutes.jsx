@@ -8,7 +8,7 @@ import { getRestaurantByUserId } from '../State/restaurantSlice';
 export const AdminRoutes = () => {
   const dispatch = useDispatch();
   const { userRestaurant, loading, error } = useSelector((state) => state.restaurant); 
-  console.log('userRestaurant', userRestaurant);
+  
 
   const jwt = localStorage.getItem("jwt");
 

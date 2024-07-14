@@ -2,7 +2,8 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Form } from 'react-router-dom'
-import { createCategory } from '../../../Components/State/Restaurant/Action'
+import { createCategory } from '../../../State/restaurantSlice'
+
 
 export const CreateFoodCategoryForm = () => {
 const[formData , setFormData] = useState({categoryName:"", restaurantId:""})

@@ -3,7 +3,7 @@ import { Box, IconButton, Modal, Table, TableBody, TableCell, TableContainer, Ta
 import CreateIcon from '@mui/icons-material/Create';
 import { CreateIngredientCategoryForm } from './CreateIngredientCategoryForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngredientsCategory } from '../../../Components/State/Ingredient/Action';
+import { getIngredientCategoryOfRestaurant } from '../../../State/ingredientSlice';
 
 const style = {
   position: 'absolute',
@@ -23,23 +23,21 @@ export const IngredientCartegoryTable = () => {
   const handleClose = () => setOpen(false);
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
-  const { restaurant, ingredient } = useSelector((store) => store);
+  const { restaurant } = useSelector((store) => store);
+  const { categories, loading, error } = useSelector((store) => store.ingredient); // Adjusted to use categories, loading, and error
 
   useEffect(() => {
-    if (restaurant.userRestaurant?.id) {
+    if (restaurant.userRestaurant?.id && jwt) {
       console.log("Fetching categories for restaurant ID:", restaurant.userRestaurant.id);
-      dispatch(getIngredientsCategory({
+      dispatch(getIngredientCategoryOfRestaurant({
         id: restaurant.userRestaurant.id,
-        jwt:jwt,
-        vegetarian:false,
-        seasonal:false,
-        nonveg:false
-
+        jwt: jwt,
+        vegetarian: false,
+        seasonal: false,
+        nonveg: false
       }));
     }
-  }, [dispatch, jwt, restaurant.userRestaurant?.id]);
-
-  console.log("Ingredient categories:", ingredient.categories);
+  }, [dispatch, jwt, restaurant.userRestaurant?.id]); // Ensure dependencies are correct
 
   return (
     <div className='flex gap-3 flex-col w-full'>
@@ -69,17 +67,24 @@ export const IngredientCartegoryTable = () => {
                   <TableCell sx={{ color: "gray", fontWeight: "bold" }} align="left">Name</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                { ingredient.categories.map((item) => (
-                  <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                    <TableCell sx={{ color: "grey.900" }} align="left">
-                      {item.id}
-                    </TableCell>
-                    <TableCell sx={{ color: "grey.900" }} align="left">{item.name}</TableCell>
+              {/* <TableBody>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={2} align="center">Loading...</TableCell>
                   </TableRow>
-                ))}
-                
-              </TableBody>
+                ) : error ? (
+                  <TableRow>
+                    <TableCell colSpan={2} align="center">Error: {error}</TableCell>
+                  </TableRow>
+                ) : (
+                  categories.map((category) => (
+                    <TableRow key={category.id}>
+                      <TableCell>{category.id}</TableCell>
+                      <TableCell>{category.name}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody> */}
             </Table>
           </TableContainer>
         </div>
