@@ -61,7 +61,7 @@ export const getRestaurantByUserId = (jwt) =>{
 }
 
 export const createRestaurant = (reqData,token) => {
-    console.log("token--------" , reqData.token)
+    console.log("token--------" , token)
     return async(dispatch)=>{
         
     dispatch({type:CREATE_RESTAURANT_REQUEST})

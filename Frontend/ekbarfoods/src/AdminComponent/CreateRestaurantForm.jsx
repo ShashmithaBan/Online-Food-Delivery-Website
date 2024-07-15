@@ -12,6 +12,8 @@ import { createRestaurant } from '../State/restaurantSlice';
 
 
 
+
+
 const initialValues = {
   name: "",
   description: "",
@@ -55,7 +57,7 @@ export const CreateRestaurantForm = () => {
       };
 
       console.log('data ---', data);
-      dispatch(createRestaurant(  { reqData: values, jwt } ));
+      dispatch(createRestaurant(  { req: values, jwt } ));
     },
   });
 

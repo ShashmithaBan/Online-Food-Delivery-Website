@@ -56,6 +56,7 @@ export const createIngredientsCategory = createAsyncThunk(
     }
   }
 );
+
 export const getIngredientCategoryOfRestaurant = createAsyncThunk(
   'ingredient/getIngredientCategoryOfRestaurant',
   async ({ id, jwt }, thunkAPI) => {
@@ -67,28 +68,23 @@ export const getIngredientCategoryOfRestaurant = createAsyncThunk(
       });
       console.log("get restaurant ingredients category", response.data);
       return response.data;
+      
     } catch (error) {
       console.error('Fetch the ingredients categories owned by the restaurant error:', error.message);
       
-     
       if (error.response) {
-        
         console.error('Server responded with error:', error.response.data);
         return thunkAPI.rejectWithValue(error.response.data);
       } else if (error.request) {
-
         console.error('No response received:', error.request);
         return thunkAPI.rejectWithValue('No response received');
       } else {
-     
         console.error('Error setting up request:', error.message);
         return thunkAPI.rejectWithValue(error.message);
       }
     }
   }
 );
-
-
 
 export const updateStockofIngredients = createAsyncThunk(
   'ingredient/updateStockofIngredients',
@@ -112,7 +108,7 @@ export const ingredientSlice = createSlice({
   name: 'ingredient',
   initialState: {
     ingredients: [],
-    categories: [],
+    categories: [], 
     update: null,
     loading: false,
     error: null
@@ -149,8 +145,10 @@ export const ingredientSlice = createSlice({
         state.error = null;
       })
       .addCase(createIngredientsCategory.fulfilled, (state, action) => {
+        
+        const categories = Array.isArray(action.payload) ? action.payload : [action.payload];
         state.loading = false;
-        state.categories.push(action.payload);
+        state.categories = state.categories.concat(categories);
       })
       .addCase(createIngredientsCategory.rejected, (state, action) => {
         state.loading = false;
@@ -164,6 +162,7 @@ export const ingredientSlice = createSlice({
         state.loading = false;
         state.categories = action.payload;
       })
+      
       .addCase(getIngredientCategoryOfRestaurant.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;

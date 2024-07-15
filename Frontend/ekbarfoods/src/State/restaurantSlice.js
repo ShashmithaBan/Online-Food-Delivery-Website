@@ -64,22 +64,31 @@ export const getRestaurantById = createAsyncThunk(
 
 export const createRestaurant = createAsyncThunk(
   'restaurant/createRestaurant',
-  async ({ reqData, jwt }, thunkAPI) => {
+  async ({ req, jwt }, thunkAPI) => {
     try {
-      console.log('Data received:', reqData);
-      const response = await api.post('/api/admin/restaurants', reqData, {
+      console.log('Data received:', req);
+      const response = await axios.post('http://localhost:5454/api/restaurants', req, {
         headers: {
           Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json', // Ensure Content-Type is set correctly
         },
       });
-      console.log("Created:", response.data);
+      console.log('Created:', response.data);
       return response.data;
     } catch (error) {
       console.error('Failed to create the restaurant:', error.message);
-      return thunkAPI.rejectWithValue(error.response.data);
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        console.error('Error response status:', error.response.status);
+      }
+      // Return a rejected action with the error message
+      return thunkAPI.rejectWithValue(error.response ? error.response.data : error.message);
     }
   }
 );
+
+
+
 
 export const updateRestaurant = createAsyncThunk(
   'restaurant/updateRestaurant',
@@ -140,7 +149,7 @@ export const createRestaurantEvent = createAsyncThunk(
   'restaurant/createRestaurantEvent',
   async ({ data, jwt, restaurantId }, thunkAPI) => {
     try {
-      const res = await api.post(`/api/admin/events/restaurant/${restaurantId}`, data, {
+      const res = await axios.post(`${API}/api/admin/events/restaurant/${restaurantId}`, data, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -310,11 +319,11 @@ export const restaurantSlice = createSlice({
       .addCase(createRestaurant.fulfilled, (state, action) => {
         state.loading = false;
         state.userRestaurant = action.payload;
-        state.restaurants.push(action.payload);
+        state.restaurants.push(action.payload); 
       })
       .addCase(createRestaurant.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || action.error;
+        state.error = action.error.message || action.error.toString();
       })
 
       // Update restaurant

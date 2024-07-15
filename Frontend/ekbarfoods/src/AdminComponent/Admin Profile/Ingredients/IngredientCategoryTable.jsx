@@ -23,12 +23,14 @@ export const IngredientCartegoryTable = () => {
   const handleClose = () => setOpen(false);
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
+  
+  // Selecting categories, loading, and error from Redux store state
   const { restaurant } = useSelector((store) => store);
-  const { categories, loading, error } = useSelector((store) => store.ingredient); // Adjusted to use categories, loading, and error
+  const { ingredient, loading, error } = useSelector((store) => store);
+  console.log('cate',ingredient)
 
   useEffect(() => {
     if (restaurant.userRestaurant?.id && jwt) {
-      console.log("Fetching categories for restaurant ID:", restaurant.userRestaurant.id);
       dispatch(getIngredientCategoryOfRestaurant({
         id: restaurant.userRestaurant.id,
         jwt: jwt,
@@ -37,7 +39,8 @@ export const IngredientCartegoryTable = () => {
         nonveg: false
       }));
     }
-  }, [dispatch, jwt, restaurant.userRestaurant?.id]); // Ensure dependencies are correct
+  }, [dispatch, jwt, restaurant.userRestaurant?.id]);
+  
 
   return (
     <div className='flex gap-3 flex-col w-full'>
@@ -77,7 +80,7 @@ export const IngredientCartegoryTable = () => {
                     <TableCell colSpan={2} align="center">Error: {error}</TableCell>
                   </TableRow>
                 ) : (
-                  categories.map((category) => (
+                  ingredient.categories.map((category) => (
                     <TableRow key={category.id}>
                       <TableCell>{category.id}</TableCell>
                       <TableCell>{category.name}</TableCell>

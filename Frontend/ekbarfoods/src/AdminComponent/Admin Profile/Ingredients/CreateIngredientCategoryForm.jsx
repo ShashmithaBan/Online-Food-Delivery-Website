@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { createIngredientsCategory } from '../../../Components/State/Ingredient/Action';
+import { createIngredientsCategory } from '../../../State/ingredientSlice';
+
 
 export const CreateIngredientCategoryForm = () => {
   const dispatch = useDispatch();
