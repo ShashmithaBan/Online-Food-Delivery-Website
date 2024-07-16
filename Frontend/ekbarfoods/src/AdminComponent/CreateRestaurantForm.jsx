@@ -1,18 +1,11 @@
-import { Button, CircularProgress, Grid, IconButton, TextField, makeStyles } from '@mui/material';
+import { Button, CircularProgress, Grid, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
-import { TextFields } from '@mui/icons-material';
 import { uploadImageToCloudinary } from './util/UploadToCloudinary';
 import { useDispatch } from 'react-redux';
 import { createRestaurant } from '../State/restaurantSlice';
-
-
-
-
-
-
 
 const initialValues = {
   name: "",
@@ -24,6 +17,10 @@ const initialValues = {
   postalCode: "",
   country: "",
   openingHours: "Mon-Sun : 9.00 AM - 9.00 PM",
+  email: "",
+  mobile: "",
+  twitter: "",
+  instagram: "",
   images: []
 };
 
@@ -46,7 +43,7 @@ export const CreateRestaurantForm = () => {
           postalCode: values.postalCode,
           country: values.country,
         },
-        contactInformations: {
+        contactInformation: {
           email: values.email,
           mobile: values.mobile,
           twitter: values.twitter,
@@ -57,7 +54,7 @@ export const CreateRestaurantForm = () => {
       };
 
       console.log('data ---', data);
-      dispatch(createRestaurant(  { req: values, jwt } ));
+      dispatch(createRestaurant({ req: data, jwt }));
     },
   });
 
@@ -217,6 +214,52 @@ export const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.country}
+              />
+            </Grid>
+          </Grid>
+          <Grid container lg={8} md={12} spacing={2} className='mt-2 pt-5 px-4'>
+            <Grid item lg={6} md={12}>
+              <TextField
+                fullWidth
+                id="email"
+                name="email"
+                label="Email"
+                variant="outlined"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+              />
+            </Grid>
+            <Grid item lg={6} md={12}>
+              <TextField
+                fullWidth
+                id="mobile"
+                name="mobile"
+                label="Mobile"
+                variant="outlined"
+                onChange={formik.handleChange}
+                value={formik.values.mobile}
+              />
+            </Grid>
+            <Grid item lg={6} md={12}>
+              <TextField
+                fullWidth
+                id="twitter"
+                name="twitter"
+                label="Twitter"
+                variant="outlined"
+                onChange={formik.handleChange}
+                value={formik.values.twitter}
+              />
+            </Grid>
+            <Grid item lg={6} md={12}>
+              <TextField
+                fullWidth
+                id="instagram"
+                name="instagram"
+                label="Instagram"
+                variant="outlined"
+                onChange={formik.handleChange}
+                value={formik.values.instagram}
               />
             </Grid>
           </Grid>

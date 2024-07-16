@@ -5,13 +5,14 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { uploadImageToCloudinary } from '../../util/UploadToCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
-import { createMenuItem } from '../../../Components/State/Menu/Action';
+import { createMenuItem } from '../../../State/menuSlice';
+
 
 const initialValues = {
   name: "",
   description: "",
   price: "",
-  category: "",
+  category: "1",
   restaurantId: "",
   vegetarian: true,
   seasonal: false,

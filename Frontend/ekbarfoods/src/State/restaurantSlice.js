@@ -67,7 +67,7 @@ export const createRestaurant = createAsyncThunk(
   async ({ req, jwt }, thunkAPI) => {
     try {
       console.log('Data received:', req);
-      const response = await axios.post('http://localhost:5454/api/restaurants', req, {
+      const response = await axios.post('http://localhost:5454/api/admin/restaurants', req, {
         headers: {
           Authorization: `Bearer ${jwt}`,
           'Content-Type': 'application/json', // Ensure Content-Type is set correctly

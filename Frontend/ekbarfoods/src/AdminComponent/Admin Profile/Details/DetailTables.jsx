@@ -49,7 +49,7 @@ export const DetailTables = () => {
 
             </div>
             </Grid>
-            <Grid item xs = {12} lg = {5}>
+            <Grid item xs = {12} lg = {6}>
 
                 <div className="flex flex-col justify-center  shadow-md  p-5">
                 <h1 className='text-2xl mb-6'>Address</h1>

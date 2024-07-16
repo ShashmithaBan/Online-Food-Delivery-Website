@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Admin } from '../AdminComponent/Admin Profile/Admin';
 import { CreateRestaurantForm } from '../AdminComponent/CreateRestaurantForm';
-import { getRestaurantByUserId } from '../State/restaurantSlice';
+import { getRestaurantByUserId, updateRestaurantStatus } from '../State/restaurantSlice';
 
 export const AdminRoutes = () => {
   const dispatch = useDispatch();
